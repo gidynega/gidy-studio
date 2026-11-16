@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gidy Studio Icon Maker</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 25px 15px;
+  background: #0b1020;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.container {
+  max-width: 480px;
+  margin: auto;
+}
+
+h1 {
+  color: #65eee4;
+}
+
+.preview {
+  width: 250px;
+  height: 250px;
+  margin: 25px auto;
+  border-radius: 35px;
+  overflow: hidden;
+  border: 3px solid #8187ff;
+  box-shadow: 0 0 25px #565cff66;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  margin: 9px 0;
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(90deg,#00d9ff,#a34bff);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+button:disabled {
+  opacity: .5;
+}
+
+p {
+  color: #b9c5e8;
+  line-height: 1.6;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<h1>Gidy Studio Icon Maker</h1>
+<p>Your original photograph. Your real face. Your brand.</p>
+
+<div class="preview">
+<canvas id="preview" width="512" height="512"></canvas>
+</div>
+
+<p id="status">Loading your original photo...</p>
+
+<button id="download192" disabled>
+Download 192 × 192 Icon
+</button>
+
+<button id="download512" disabled>
+Download 512 × 512 Icon
+</button>
+
+</div>
+
+<script>
+const canvas = document.getElementById("preview");
+const ctx = canvas.getContext("2d");
+const status = document.getElementById("status");
+
+const photo = new Image();
+photo.onload = () => {
+  drawIcon();
+  status.textContent = "Your original photo is ready!";
+  document.getElementById("download192").disabled = false;
+  document.getElementById("download512").disabled = false;
+};
+
+photo.onerror = () => {
+  status.textContent =
+    "Photo not found. Check that gidy-photo.jpg is in the repository root.";
+};
+
+photo.src = "./gidy-photo.jpg";
+
+function drawIcon() {
+  const size = 512;
+
+  ctx.clearRect(0, 0, size, size);
+
+  // Dark navy background
+  ctx.fillStyle = "#0b1020";
+  ctx.fillRect(0, 0, size, size);
+
+  // Crop the original photograph into a square
+  const crop = Math.min(photo.width, photo.height);
+  const sx = (photo.width - crop) / 2;
+  const sy = (photo.height - crop) / 2;
+
+  ctx.save();
+
+  ctx.beginPath();
+  ctx.roundRect(12, 12, 488, 488, 65);
+  ctx.clip();
+
+  ctx.drawImage(
+    photo,
+    sx, sy, crop, crop,
+    12, 12, 488, 488
+  );
+
+  ctx.restore();
+
+  // Neon gradient border
+  const gradient = ctx.createLinearGradient(0, 0, 512, 512);
+  gradient.addColorStop(0, "#00eaff");
+  gradient.addColorStop(0.5, "#7777ff");
+  gradient.addColorStop(1, "#ed42ff");
+
+  ctx.strokeStyle = gradient;
+  ctx.lineWidth = 12;
+
+  ctx.beginPath();
+  ctx.roundRect(8, 8, 496, 496, 68);
+  ctx.stroke();
+}
+
+function downloadIcon(size) {
+  const output = document.createElement("canvas");
+  output.width = size;
+  output.height = size;
+
+  output.getContext("2d").drawImage(
+    canvas, 0, 0, size, size
+  );
+
+  output.toBlob(blob => {
+    if (!blob) {
+      status.textContent = "Image export failed. Please try again.";
+      return;
+    }
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = `icon-${size}.png`;
+    link.click();
+
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    status.textContent = `icon-${size}.png downloaded!`;
+  }, "image/png");
+}
+
+document.getElementById("download192").onclick =
+  () => downloadIcon(192);
+
+document.getElementById("download512").onclick =
+  () => downloadIcon(512);
+</script>
+
+</body>
+</html>
