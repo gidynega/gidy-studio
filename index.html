@@ -17,6 +17,242 @@
 </head>
 <body>
 <div class="app">
+
+<!-- =====================================
+     GIDY STUDIO — HOME DASHBOARD
+===================================== -->
+
+<section id="homeScreen" class="home-screen">
+
+  <header class="home-topbar">
+    <button class="profile-avatar" id="profileButton">G</button>
+
+    <label class="home-search">
+      <span>⌕</span>
+      <input id="homeSearch" type="search"
+        placeholder="Search your documents">
+    </label>
+
+    <button class="home-icon-button" id="notificationsButton">♧</button>
+  </header>
+
+  <div class="home-welcome">
+    <div>
+      <p class="home-kicker">YOUR CREATIVE WORKSPACE</p>
+      <h1>Good day, Creator 👋</h1>
+      <p>What would you like to create today?</p>
+    </div>
+  </div>
+
+  <div class="feature-row">
+    <button class="feature-card feature-ai" data-open="slides">
+      <span class="feature-icon">✦</span>
+      <span>
+        <b>AI Slides</b>
+        <small>Turn ideas into presentations</small>
+      </span>
+      <span class="feature-arrow">›</span>
+    </button>
+
+    <button class="feature-card feature-translate" data-tool="Translate">
+      <span class="feature-icon">文</span>
+      <span>
+        <b>AI Translate</b>
+        <small>Translate your documents</small>
+      </span>
+      <span class="feature-arrow">›</span>
+    </button>
+  </div>
+
+  <div class="quick-tools">
+    <button data-tool="Edit PDF">Edit PDF</button>
+    <button data-tool="PDF to Word">PDF to Word</button>
+    <button data-tool="PDF Signature">PDF Signature</button>
+    <button data-tool="Image to PDF">Image to PDF</button>
+  </div>
+
+  <section class="workspace-section">
+    <div class="section-heading">
+      <div>
+        <h2>My workspace</h2>
+        <p>Your files, all in one place</p>
+      </div>
+      <button id="sortFiles" class="subtle-button">↕ Sort</button>
+    </div>
+
+    <div class="workspace-tabs" id="workspaceTabs">
+      <button class="active" data-filter="device">This Device</button>
+      <button data-filter="recent">Recent</button>
+      <button data-filter="shared">Shared</button>
+      <button data-filter="starred">Starred</button>
+    </div>
+
+    <div class="file-toolbar">
+      <span id="fileCount">Recent files</span>
+      <div>
+        <button id="listView" class="view-button active">☰</button>
+        <button id="gridView" class="view-button">▦</button>
+      </div>
+    </div>
+
+    <div id="homeFileList" class="home-file-list">
+
+      <button class="home-file" data-open="editor">
+        <span class="file-type slides-type">P</span>
+        <span class="file-details">
+          <b>Welcome to Gidy Studio</b>
+          <small>Presentation · On this device</small>
+        </span>
+        <span class="file-more">•••</span>
+      </button>
+
+      <div class="home-empty-note">
+        Your projects will appear here as you create and save them.
+      </div>
+
+    </div>
+  </section>
+
+  <button class="home-fab" id="openNew">＋</button>
+
+  <nav class="home-bottom-nav">
+    <button class="selected" data-nav="Home">
+      <span>⌂</span>Home
+    </button>
+    <button data-nav="Files">
+      <span>▤</span>Files
+    </button>
+    <button data-nav="Scan">
+      <span>▣</span>Scan
+    </button>
+    <button data-nav="Discover">
+      <span>◇</span>Discover
+    </button>
+    <button data-nav="Me">
+      <span>○</span>Me
+    </button>
+  </nav>
+
+</section>
+
+<!-- NEW CREATION BOTTOM SHEET -->
+
+<div class="new-sheet-backdrop" id="newSheet" aria-hidden="true">
+
+  <section class="new-sheet" role="dialog" aria-modal="true">
+
+    <header>
+      <span></span>
+      <h2 id="newSheetTitle">New</h2>
+      <button id="closeNew">✕</button>
+    </header>
+
+    <h3>Documents</h3>
+
+    <div class="creation-grid">
+      <button data-create="Docs"><i class="create-icon docs">W</i>Docs</button>
+      <button data-create="Slides"><i class="create-icon slides">P</i>Slides</button>
+      <button data-create="Sheets"><i class="create-icon sheets">▦</i>Sheets</button>
+      <button data-tool="PDF"><i class="create-icon pdf">PDF</i>PDF</button>
+      <button data-tool="Resume"><i class="create-icon resume">CV</i>Resume</button>
+      <button data-tool="TXT"><i class="create-icon txt">T</i>TXT</button>
+      <button data-tool="Scan"><i class="create-icon scan">▣</i>Scan</button>
+    </div>
+
+    <h3>Online documents</h3>
+
+    <div class="creation-grid">
+      <button data-tool="AirPage"><i class="create-icon online">A</i>AirPage</button>
+      <button data-tool="AirSheet"><i class="create-icon online">▦</i>AirSheet</button>
+      <button data-tool="Forms"><i class="create-icon online">☷</i>Forms</button>
+      <button data-tool="DBSheet"><i class="create-icon online">▤</i>DBSheet</button>
+    </div>
+
+    <h3>Tools</h3>
+
+    <div class="creation-grid">
+      <button data-tool="Edit PDF"><i class="create-icon pdf">PDF</i>Edit PDF</button>
+      <button data-tool="PDF to Word"><i class="create-icon docs">W</i>PDF to Word</button>
+      <button data-tool="Image to PDF"><i class="create-icon image">▧</i>Image to PDF</button>
+      <button data-tool="PDF Forms"><i class="create-icon pdf">PDF</i>PDF Forms</button>
+      <button data-tool="Study Assistant"><i class="create-icon study">✦</i>Study Assistant</button>
+      <button data-tool="Translate"><i class="create-icon translate">文</i>Translate</button>
+      <button data-open="slides"><i class="create-icon ai">✧</i>AI Slides</button>
+      <button data-tool="More"><i class="create-icon more">•••</i>More</button>
+    </div>
+
+  </section>
+</div>
+
+<!-- SLIDE TEMPLATE PICKER -->
+
+<div class="template-screen" id="templateScreen" aria-hidden="true">
+
+  <header>
+    <button id="backTemplates">‹</button>
+    <h2>New Slides</h2>
+    <button id="templateMenu">⋯</button>
+  </header>
+
+  <section>
+    <div class="section-heading">
+      <h3>Most used</h3>
+    </div>
+
+    <button class="blank-template" id="blankTemplate">
+      <span>＋</span>
+      <b>Blank</b>
+      <small>Start with an empty presentation</small>
+    </button>
+  </section>
+
+  <section>
+    <div class="section-heading">
+      <h3>Education</h3>
+      <button class="subtle-button">More ›</button>
+    </div>
+
+    <div class="template-row">
+      <button class="template-card education-template" data-template="violet-academic">
+        <span>EDUCATION</span>
+        <b>Academic</b>
+      </button>
+
+      <button class="template-card science-template" data-template="mint-pro">
+        <span>SCIENCE</span>
+        <b>Research</b>
+      </button>
+
+      <button class="template-card lesson-template" data-template="sunset-story">
+        <span>LESSON</span>
+        <b>Class lesson</b>
+      </button>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-heading">
+      <h3>Business</h3>
+      <button class="subtle-button">More ›</button>
+    </div>
+
+    <div class="template-row">
+      <button class="template-card business-template" data-template="dark-tech">
+        <span>BUSINESS</span>
+        <b>Modern pitch</b>
+      </button>
+
+      <button class="template-card minimal-template" data-template="minimal-quote">
+        <span>STRATEGY</span>
+        <b>Key message</b>
+      </button>
+    </div>
+  </section>
+
+</div>
+
+<!-- END NEW HOME INTERFACE -->
+
 <header class="top">
  <div class="brand"><div class="logo">G</div><div><h1>Gidy Studio</h1><small>Create · Animate · Present · V11</small></div></div>
  <div class="actions">
