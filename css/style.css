@@ -28,3 +28,89 @@ body.presenting #slidePreview{width:min(100%,1200px);max-height:85vh}
 body.presenting .presentation-nav button{padding:12px 18px;font-size:15px}
 @media(max-width:1000px){.layout{grid-template-columns:220px minmax(0,1fr)}.right{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:12px}.right h2{grid-column:1/-1}}
 @media(max-width:650px){.app{padding:10px}.layout{grid-template-columns:1fr}.left{order:2}.center{order:1}.right{order:3;display:block}.canvas-wrap{min-height:230px;padding:7px}.panel{padding:12px}.top{align-items:flex-start}.actions button{padding:8px;font-size:12px}}
+
+/* ==================================
+   GIDY STUDIO — PROFESSIONAL EDITOR TABS
+================================== */
+
+.editor-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 18px;
+  padding: 10px;
+  background: #0e1629;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+}
+
+.editor-tab {
+  min-width: 0;
+  padding: 11px 7px;
+  font-size: 12px;
+  font-weight: 650;
+  border-radius: 9px;
+  background: #18243a;
+  color: var(--muted);
+  transition: .2s ease;
+}
+
+.editor-tab:hover {
+  background: #263650;
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+.editor-tab.active {
+  background: linear-gradient(120deg, #287f78, #5144a8);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 3px 12px #0004;
+}
+
+.editor-tab-content {
+  display: none;
+  animation: editorPanelIn .2s ease;
+}
+
+.editor-tab-content.active {
+  display: block;
+}
+
+.editor-tab-content[hidden] {
+  display: none !important;
+}
+
+.editor-tab-content h2 {
+  margin-top: 17px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.editor-tab-content .field button {
+  margin: 3px 2px;
+}
+
+@keyframes editorPanelIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media(max-width:650px) {
+  .editor-tabs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    padding: 8px;
+  }
+
+  .editor-tab {
+    font-size: 11px;
+    padding: 10px 4px;
+  }
+}
