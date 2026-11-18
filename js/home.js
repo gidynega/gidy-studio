@@ -57,59 +57,66 @@ document.addEventListener("DOMContentLoaded", () => {
     console.warn("Tool not found:", name);
   }
 }
-  
-// AI SLIDES — OPEN TEMPLATE PICKER
-const aiSlides = $('[data-open="slides"]');
-const templateScreen = $("#templateScreen");
-const backTemplates = $("#backTemplates");
+ 
+  // AI SLIDES — OPEN TEMPLATE PICKER
+  const templateScreen = $("#templateScreen");
+  const aiGeneratorScreen = $("#aiGeneratorScreen");
+  const backTemplates = $("#backTemplates");
 
-aiSlides?.addEventListener("click", event => {
-  event.preventDefault();
+  // Open AI Slides from dashboard or creation menu
+  $$('[data-open="slides"]').forEach(button => {
+    button.addEventListener("click", event => {
+      event.preventDefault();
 
-  closeCreationMenu();
+      closeCreationMenu();
 
-  if (templateScreen) {
-    templateScreen.classList.add("open");
-    templateScreen.setAttribute("aria-hidden", "false");
-  }
-});
+      templateScreen?.classList.add("open");
+      templateScreen?.setAttribute("aria-hidden", "false");
 
-// BACK TO HOME
-backTemplates?.addEventListener("click", () => {
-  templateScreen?.classList.remove("open");
-  templateScreen?.setAttribute("aria-hidden", "true");
-});
+      aiGeneratorScreen?.classList.remove("open");
+    });
+  });
 
+  // Return from templates to Home
+  backTemplates?.addEventListener("click", () => {
+    templateScreen?.classList.remove("open");
+    templateScreen?.setAttribute("aria-hidden", "true");
+  });
 
-  // OPEN EXISTING PRESENTATION EDITOR
-  function openPresentationEditor() {
-    document.body.classList.remove("home-mode");
-    document.body.classList.add("editor-mode");
+  // OPEN AI GENERATOR
+  function openAIGenerator(templateName) {
+    const templateSelect = $("#aiSlideTemplate");
+
+    if (templateSelect && templateName) {
+      templateSelect.value = templateName;
+    }
 
     templateScreen?.classList.remove("open");
     templateScreen?.setAttribute("aria-hidden", "true");
+
+    aiGeneratorScreen?.classList.add("open");
   }
 
-  // BLANK PRESENTATION
+  // BLANK — OPEN AI GENERATOR
   $("#blankTemplate")?.addEventListener("click", () => {
-    $("#newDeck")?.click();
-    openPresentationEditor();
+    openAIGenerator("mint-pro");
   });
 
-  // OPEN SELECTED PRESENTATION TEMPLATE
+  // SELECT A PRESENTATION TEMPLATE
   $$("[data-template]").forEach(button => {
     button.addEventListener("click", () => {
-      const templateName = button.dataset.template;
-      const templateSelect = $("#template");
-
-      if (templateSelect) {
-        templateSelect.value = templateName;
-        $("#applyTemplate")?.click();
-      }
-
-      openPresentationEditor();
+      openAIGenerator(button.dataset.template);
     });
   });
+
+  // BACK FROM AI GENERATOR TO TEMPLATES
+  $("#backAIGenerator")?.addEventListener("click", () => {
+    aiGeneratorScreen?.classList.remove("open");
+
+    templateScreen?.classList.add("open");
+    templateScreen?.setAttribute("aria-hidden", "false");
+  });
+
 
   // AI TRANSLATE
   const translate = $('[data-tool="Translate"]');
