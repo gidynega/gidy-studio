@@ -114,3 +114,70 @@ body.presenting .presentation-nav button{padding:12px 18px;font-size:15px}
     padding: 10px 4px;
   }
 }
+
+/* =========================================
+   GIDY STUDIO — PROFESSIONAL EDITOR LAYOUT
+   Interface reorganization
+========================================= */
+
+/* Main editor workspace */
+.editor {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* Top toolbar */
+.app > .top {
+  position: relative;
+  z-index: 100;
+  width: 100%;
+}
+
+/* Main workspace */
+.app > .layout {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+}
+
+/* Editor center area */
+.app .center {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+}
+
+/* Bottom navigation */
+.app > .bottom {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+/* Keep editor elements organized */
+.app .sidebar,
+.app .right-panel,
+.app .center {
+  box-sizing: border-box;
+}
+
+/* Prevent accidental horizontal overflow */
+.app {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Mobile adaptation */
+@media (max-width: 768px) {
+  .app > .layout {
+    min-width: 0;
+  }
+
+  .app .center {
+    width: 100%;
+  }
+}
