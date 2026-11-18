@@ -119,19 +119,49 @@ document.addEventListener("DOMContentLoaded", () => {
 
     aiGeneratorScreen?.classList.add("open");
   }
+ 
 
-  // BLANK — OPEN AI GENERATOR
+  // OPEN THE EXISTING PRESENTATION EDITOR
+  function openPresentationEditor(templateName) {
+
+    const templateSelect = $("#template");
+    const newDeckButton = $("#newDeck");
+    const applyTemplateButton = $("#applyTemplate");
+
+    if (templateName && templateSelect) {
+      templateSelect.value = templateName;
+    }
+
+    templateScreen?.classList.remove("open");
+    templateScreen?.setAttribute("aria-hidden", "true");
+
+    aiGeneratorScreen?.classList.remove("open");
+
+    // Create a new presentation using existing editor logic
+    newDeckButton?.click();
+
+    // Apply the selected presentation design
+    if (templateName && applyTemplateButton) {
+      applyTemplateButton.click();
+    }
+
+    document.body.classList.remove("home-mode");
+    document.body.classList.add("editor-mode");
+  }
+
+  // BLANK PRESENTATION
   $("#blankTemplate")?.addEventListener("click", () => {
-    openAIGenerator("mint-pro");
+    openPresentationEditor("mint-pro");
   });
 
   // SELECT A PRESENTATION TEMPLATE
   $$("[data-template]").forEach(button => {
     button.addEventListener("click", () => {
-      openAIGenerator(button.dataset.template);
+      openPresentationEditor(button.dataset.template);
     });
   });
 
+  
   // BACK FROM AI GENERATOR TO TEMPLATES
   $("#backAIGenerator")?.addEventListener("click", () => {
     aiGeneratorScreen?.classList.remove("open");
