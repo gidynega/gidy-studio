@@ -85,6 +85,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+
+  // OPEN SLIDES FROM THE PLUS CREATION MENU
+  $$('[data-create="Slides"]').forEach(button => {
+    button.addEventListener("click", event => {
+      event.preventDefault();
+
+      closeCreationMenu();
+
+      templateScreen?.classList.add("open");
+      templateScreen?.setAttribute("aria-hidden", "false");
+
+      aiGeneratorScreen?.classList.remove("open");
+    });
+  });
+
   // Return from templates to Home
   backTemplates?.addEventListener("click", () => {
     templateScreen?.classList.remove("open");
