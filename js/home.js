@@ -49,23 +49,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // OPEN A TOOL THROUGH ITS EXISTING BUTTON
   function launchTool(name) {
-    openCreationMenu();
+  const tool = findTool(name);
 
-    const tool = findTool(name);
-
-    if (tool) {
-      tool.click();
-    } else {
-      console.info("Creation tool not found:", name);
-    }
+  if (tool) {
+    tool.click();
+  } else {
+    console.warn("Tool not found:", name);
   }
-
+}
   // AI SLIDES
   const aiSlides = $('[data-open="slides"]');
 
   aiSlides?.addEventListener("click", event => {
     event.preventDefault();
-    launchTool("slides");
+    launchTool("AI Slides");
   });
 
   // AI TRANSLATE
