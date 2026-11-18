@@ -57,13 +57,29 @@ document.addEventListener("DOMContentLoaded", () => {
     console.warn("Tool not found:", name);
   }
 }
-  // AI SLIDES
-  const aiSlides = $('[data-open="slides"]');
+  
+// AI SLIDES — OPEN TEMPLATE PICKER
+const aiSlides = $('[data-open="slides"]');
+const templateScreen = $("#templateScreen");
+const backTemplates = $("#backTemplates");
 
-  aiSlides?.addEventListener("click", event => {
-    event.preventDefault();
-    launchTool("AI Slides");
-  });
+aiSlides?.addEventListener("click", event => {
+  event.preventDefault();
+
+  closeCreationMenu();
+
+  if (templateScreen) {
+    templateScreen.classList.add("open");
+    templateScreen.setAttribute("aria-hidden", "false");
+  }
+});
+
+// BACK TO HOME
+backTemplates?.addEventListener("click", () => {
+  templateScreen?.classList.remove("open");
+  templateScreen?.setAttribute("aria-hidden", "true");
+});
+
 
   // AI TRANSLATE
   const translate = $('[data-tool="Translate"]');
