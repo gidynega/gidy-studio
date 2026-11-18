@@ -338,38 +338,266 @@
   <p class="hint canvas-help">V10: Add audio and video to slides (up to 3 MB each), add captions, present your deck, write speaker notes, choose transitions, and use the full design and editing tools.</p><div class="toolbar"><div><span class="hint" id="slideCount">Slide 1 of 1</span></div><div><button id="duplicate">Duplicate slide</button></div></div>
   <div class="status" id="status" aria-live="polite"></div>
  </section>
- <aside class="panel right">
-  <section><h2>Edit selected slide</h2>
-   <div class="field"><label>Small heading</label><input id="eyebrow" value="GIDY STUDIO"></div>
-   <div class="field"><label>Slide title</label><input id="title" value="Welcome to Gidy Studio"></div>
-   <div class="field"><label>Description / body</label><textarea id="body">Create your first professional presentation.</textarea></div><div class="field"><label>Speaker notes (private — not shown on slide)</label><textarea id="speakerNotes" placeholder="Add reminders, explanations, or talking points for this slide..."></textarea><p class="hint">Speaker notes are saved with your project and included in JSON backups.</p></div>
-   <div class="field"><label>Media caption (optional)</label><input id="mediaCaption" maxlength="160" placeholder="Describe this audio or video"></div>
-   <div class="field"><label>Upload an image for this slide</label><input id="imageUpload" type="file" accept="image/*"><p class="hint">Choose a photo or illustration from your device. The image is stored inside this project on this device.</p><button id="removeImage" type="button">Remove slide image</button></div>
-   <div class="field"><label>Design theme</label><select id="theme"><option value="mint">Fresh mint</option><option value="midnight">Midnight blue</option><option value="sunset">Warm sunset</option><option value="violet">Royal violet</option></select></div>
-   <div class="field"><label>Layout for this slide</label><select id="layout"><option value="standard">Standard</option><option value="title">Title slide</option><option value="split">Text + image split</option><option value="image-focus">Image focus</option><option value="quote">Quote / statement</option></select></div>
-   <h2 style="margin-top:18px">Text formatting</h2>
-   <div class="format-grid">
-    <div class="field"><label>Title size</label><input id="titleSize" type="range" min="20" max="64" value="44"></div>
-    <div class="field"><label>Body size</label><input id="bodySize" type="range" min="12" max="32" value="20"></div>
-    <div class="field"><label>Title color</label><input id="titleColor" type="color" value="#173c35"></div>
-    <div class="field"><label>Text alignment</label><select id="textAlign"><option value="left">Left</option><option value="center">Center</option><option value="right">Right</option></select></div>
-    <div class="field"><label><input id="titleBold" type="checkbox" checked> Bold title</label></div>
-    <div class="field"><label><input id="titleItalic" type="checkbox"> Italic title</label></div>
-   </div>
-   <p class="mobile-note">Formatting applies to the selected slide and is included in project backups.</p>
+ 
+<aside class="panel right" id="editorProperties">
+
+  <h2>Editing tools</h2>
+
+  <!-- RIGHT-SIDE TABS -->
+  <div class="editor-tabs" id="editorTabs">
+    <button class="editor-tab active" data-editor-tab="design">🎨 Design</button>
+    <button class="editor-tab" data-editor-tab="insert">＋ Insert</button>
+    <button class="editor-tab" data-editor-tab="text">T Text</button>
+    <button class="editor-tab" data-editor-tab="arrange">▱ Arrange</button>
+    <button class="editor-tab" data-editor-tab="animation">▶ Animation</button>
+    <button class="editor-tab" data-editor-tab="ai">✦ AI Assistant</button>
+  </div>
+
+  <!-- DESIGN TAB -->
+  <section class="editor-tab-content active" data-editor-panel="design">
+    <h2>Slide content</h2>
+
+    <div class="field">
+      <label>Small heading</label>
+      <input id="eyebrow" value="GIDY STUDIO">
+    </div>
+
+    <div class="field">
+      <label>Slide title</label>
+      <input id="title" value="Welcome to Gidy Studio">
+    </div>
+
+    <div class="field">
+      <label>Description / body</label>
+      <textarea id="body">Create your first professional presentation.</textarea>
+    </div>
+
+    <div class="field">
+      <label>Speaker notes</label>
+      <textarea id="speakerNotes" placeholder="Add presentation notes..."></textarea>
+    </div>
+
+    <div class="field">
+      <label>Media caption</label>
+      <input id="mediaCaption" maxlength="160" placeholder="Describe this audio or video">
+    </div>
+
+    <div class="field">
+      <label>Upload slide image</label>
+      <input id="imageUpload" type="file" accept="image/*">
+      <p class="hint">Choose an image from your device.</p>
+      <button id="removeImage" type="button">Remove slide image</button>
+    </div>
+
+    <h2>Slide appearance</h2>
+
+    <div class="field">
+      <label>Design theme</label>
+      <select id="theme">
+        <option value="mint">Fresh mint</option>
+        <option value="midnight">Midnight blue</option>
+        <option value="sunset">Warm sunset</option>
+        <option value="violet">Royal violet</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Slide layout</label>
+      <select id="layout">
+        <option value="standard">Standard</option>
+        <option value="title">Title slide</option>
+        <option value="split">Text + image split</option>
+        <option value="image-focus">Image focus</option>
+        <option value="quote">Quote / statement</option>
+      </select>
+    </div>
+
+    <h2>Professional templates</h2>
+
+    <div class="field">
+      <label>Presentation template</label>
+      <select id="template">
+        <option value="mint-pro">Mint Professional</option>
+        <option value="dark-tech">Dark Technology</option>
+        <option value="sunset-story">Sunset Story</option>
+        <option value="violet-academic">Violet Academic</option>
+        <option value="minimal-quote">Minimal Quote</option>
+      </select>
+    </div>
+
+    <button id="applyTemplate" class="primary" style="width:100%">
+      Apply template to presentation
+    </button>
   </section>
-  <section style="margin-top:20px"><h2>Professional template library</h2>
-   <div class="field"><label>Choose a presentation template</label><select id="template"><option value="mint-pro">Mint Professional</option><option value="dark-tech">Dark Technology</option><option value="sunset-story">Sunset Story</option><option value="violet-academic">Violet Academic</option><option value="minimal-quote">Minimal Quote</option></select></div>
-   <button id="applyTemplate" class="primary" style="width:100%">Apply template to presentation</button>
-   <p class="hint">Applies a coordinated theme and starting layout to every slide. You can then change each slide layout separately.</p>
+
+  <!-- INSERT TAB -->
+  <section class="editor-tab-content" data-editor-panel="insert" hidden>
+    <h2>Insert elements</h2>
+
+    <div class="field">
+      <label>Text and shapes</label>
+      <button id="addText">＋ Text box</button>
+      <button id="addRect">▭ Rectangle</button>
+      <button id="addCircle">◯ Circle</button>
+      <button id="addTriangle">△ Triangle</button>
+      <button id="addArrow">➜ Arrow</button>
+      <button id="addIcon">★ Icon</button>
+    </div>
+
+    <h2>Images and backgrounds</h2>
+
+    <div class="field">
+      <label>Slide background image</label>
+      <input id="backgroundUpload" type="file" accept="image/*">
+      <button id="removeBackground">Remove background</button>
+    </div>
+
+    <div class="field">
+      <label>Upload video (MP4/WebM, max 3 MB)</label>
+      <input id="videoUpload" type="file" accept="video/mp4,video/webm">
+    </div>
+
+    <div class="field">
+      <label>Upload audio (max 3 MB)</label>
+      <input id="audioUpload" type="file" accept="audio/mpeg,audio/wav,audio/ogg,audio/mp4">
+    </div>
+
+    <button id="removeMedia" class="danger">Remove media</button>
   </section>
-  <section style="margin-top:20px"><h2>AI presentation assistant</h2>
-   <div class="field"><label>Describe your presentation topic</label><textarea id="prompt" placeholder="Example: GERD — definition, causes, symptoms, diagnosis and treatment"></textarea></div>
-   <button id="generate" class="primary" style="width:100%">✦ Generate slide outline</button>
-   <p class="hint">This starter creates a structured draft locally. Connect an AI backend later for full AI-written content.</p>
+
+  <!-- TEXT TAB -->
+  <section class="editor-tab-content" data-editor-panel="text" hidden>
+    <h2>Text formatting</h2>
+
+    <div class="field">
+      <label>Font family</label>
+      <select id="objectFont">
+        <option value="Arial">Arial</option>
+        <option value="Georgia">Georgia</option>
+        <option value="Verdana">Verdana</option>
+        <option value="Trebuchet MS">Trebuchet MS</option>
+        <option value="Courier New">Courier New</option>
+        <option value="Impact">Impact</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Title size</label>
+      <input id="titleSize" type="range" min="20" max="64" value="44">
+    </div>
+
+    <div class="field">
+      <label>Body size</label>
+      <input id="bodySize" type="range" min="12" max="32" value="20">
+    </div>
+
+    <div class="field">
+      <label>Title color</label>
+      <input id="titleColor" type="color" value="#173c35">
+    </div>
+
+    <div class="field">
+      <label>Text alignment</label>
+      <select id="textAlign">
+        <option value="left">Left</option>
+        <option value="center">Center</option>
+        <option value="right">Right</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label><input id="titleBold" type="checkbox" checked> Bold title</label>
+    </div>
+
+    <div class="field">
+      <label><input id="titleItalic" type="checkbox"> Italic title</label>
+    </div>
+
+    <div class="field">
+      <label>Selected object color</label>
+      <input id="objectColor" type="color" value="#ff75c8">
+    </div>
+
+    <p class="mobile-note">Formatting applies to the selected slide or object.</p>
   </section>
-  <section style="margin-top:20px"><h2>Animation</h2><p class="hint">Choose an entrance effect from the toolbar, then tap Preview animation. The effect is stored with the slide.</p></section>
- </aside>
+
+  <!-- ARRANGE TAB -->
+  <section class="editor-tab-content" data-editor-panel="arrange" hidden>
+    <h2>Object arrangement</h2>
+
+    <div class="field">
+      <button id="layerUp">Bring forward</button>
+      <button id="layerDown">Send backward</button>
+      <button id="deleteObject" class="danger">Delete object</button>
+    </div>
+
+    <h2>Design grid</h2>
+
+    <div class="field">
+      <label>
+        <input id="showGrid" type="checkbox" checked>
+        Show design grid
+      </label>
+    </div>
+
+    <div class="field">
+      <label>
+        <input id="snapGrid" type="checkbox" checked>
+        Snap to grid
+      </label>
+    </div>
+  </section>
+
+  <!-- ANIMATION TAB -->
+  <section class="editor-tab-content" data-editor-panel="animation" hidden>
+    <h2>Slide transitions</h2>
+
+    <div class="field">
+      <label>Transition effect</label>
+      <select id="slideTransition">
+        <option value="fade">Fade</option>
+        <option value="push">Push left</option>
+        <option value="zoom">Zoom</option>
+        <option value="none">None</option>
+      </select>
+    </div>
+
+    <h2>Object animation</h2>
+
+    <div class="field">
+      <label>Entrance effect</label>
+      <select id="slideAnimation">
+        <option value="fade">Fade</option>
+        <option value="rise">Rise</option>
+        <option value="zoom">Zoom</option>
+        <option value="slide">Slide in</option>
+        <option value="none">None</option>
+      </select>
+    </div>
+
+    <button id="animate" class="primary" style="width:100%">
+      ▶ Preview animation
+    </button>
+  </section>
+
+  <!-- AI ASSISTANT TAB -->
+  <section class="editor-tab-content" data-editor-panel="ai" hidden>
+    <h2>AI presentation assistant</h2>
+
+    <div class="field">
+      <label>Describe your presentation topic</label>
+      <textarea id="prompt" placeholder="Example: Peptic Ulcer Disease — definition, causes, diagnosis and treatment"></textarea>
+    </div>
+
+    <button id="generate" class="primary" style="width:100%">
+      ✦ Generate slide outline
+    </button>
+
+    <p class="hint">Create a structured presentation outline.</p>
+  </section>
+
+</aside>
+
 </main>
 <footer class="bottom">Gidy Studio V11 · Media playback, presenter mode, speaker notes, slide transitions, grid snapping, alignment guides, editable object colors, text boxes, shapes, layers & project backup · Audio/video preview (files up to 3 MB per slide); media is saved in JSON project backups. Media playback is not embedded in PPTX/PDF exports yet. Your projects stay on this device unless you export or connect cloud storage.</footer>
 </div>
