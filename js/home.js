@@ -81,6 +81,36 @@ backTemplates?.addEventListener("click", () => {
 });
 
 
+  // OPEN EXISTING PRESENTATION EDITOR
+  function openPresentationEditor() {
+    document.body.classList.remove("home-mode");
+    document.body.classList.add("editor-mode");
+
+    templateScreen?.classList.remove("open");
+    templateScreen?.setAttribute("aria-hidden", "true");
+  }
+
+  // BLANK PRESENTATION
+  $("#blankTemplate")?.addEventListener("click", () => {
+    $("#newDeck")?.click();
+    openPresentationEditor();
+  });
+
+  // OPEN SELECTED PRESENTATION TEMPLATE
+  $$("[data-template]").forEach(button => {
+    button.addEventListener("click", () => {
+      const templateName = button.dataset.template;
+      const templateSelect = $("#template");
+
+      if (templateSelect) {
+        templateSelect.value = templateName;
+        $("#applyTemplate")?.click();
+      }
+
+      openPresentationEditor();
+    });
+  });
+
   // AI TRANSLATE
   const translate = $('[data-tool="Translate"]');
 
