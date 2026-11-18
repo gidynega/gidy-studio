@@ -17,19 +17,27 @@ document.addEventListener("DOMContentLoaded", () => {
   const newSheet = $("#newSheet");
   const fileList = $("#homeFileList");
 
+  
   // OPEN CREATION MENU
   function openCreationMenu() {
     if (!newSheet) return;
+
     newSheet.classList.add("open");
+    newSheet.setAttribute("aria-hidden", "false");
     newSheet.style.display = "flex";
+    document.body.classList.add("sheet-open");
   }
 
   // CLOSE CREATION MENU
   function closeCreationMenu() {
     if (!newSheet) return;
+
     newSheet.classList.remove("open");
+    newSheet.setAttribute("aria-hidden", "true");
     newSheet.style.display = "";
+    document.body.classList.remove("sheet-open");
   }
+
 
   // FIND AN EXISTING TOOL
   function findTool(name) {
@@ -136,18 +144,30 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // ORANGE PLUS BUTTON
+  
+  // PLUS BUTTON
   newButton?.addEventListener("click", event => {
     event.preventDefault();
     openCreationMenu();
   });
 
-  // CLOSE WHEN BACKDROP ITSELF IS TAPPED
+  // CLOSE BUTTON
+  $("#closeNew")?.addEventListener("click", closeCreationMenu);
+
+  // CLOSE WHEN BACKDROP IS TAPPED
   newSheet?.addEventListener("click", event => {
     if (event.target === newSheet) {
       closeCreationMenu();
     }
   });
+
+  // ESCAPE KEY CLOSES MENU
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+      closeCreationMenu();
+    }
+  });
+
 
   // WORKSPACE FILTERS
   const workspaceTabs = $$("#workspaceTabs button[data-filter]");
