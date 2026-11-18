@@ -250,6 +250,70 @@
 
 </div>
 
+<!-- AI SLIDE GENERATOR WORKSPACE -->
+
+<section id="aiGeneratorScreen" class="ai-generator-screen">
+
+  <header class="ai-generator-header">
+    <button id="backAIGenerator">←</button>
+    <div>
+      <h2>AI Slide Generator</h2>
+      <small>Create presentations with AI</small>
+    </div>
+    <span>✦</span>
+  </header>
+
+  <div class="ai-generator-content">
+
+    <div class="ai-generator-welcome">
+      <span class="ai-generator-icon">✦</span>
+      <h1>What would you like to present?</h1>
+      <p>Describe your topic and let AI help you create a professional presentation.</p>
+    </div>
+
+    <div class="ai-generator-card">
+
+      <label for="aiSlideTopic">Presentation topic</label>
+
+      <textarea
+        id="aiSlideTopic"
+        placeholder="Example: Peptic Ulcer Disease — definition, causes, symptoms, diagnosis and treatment..."
+      ></textarea>
+
+      <label for="aiSlideTemplate">Presentation design</label>
+
+      <select id="aiSlideTemplate">
+        <option value="mint-pro">Mint Professional</option>
+        <option value="dark-tech">Dark Technology</option>
+        <option value="sunset-story">Sunset Story</option>
+        <option value="violet-academic">Violet Academic</option>
+        <option value="minimal-quote">Minimal Quote</option>
+      </select>
+
+      <label for="aiSlideCount">Number of slides</label>
+
+      <select id="aiSlideCount">
+        <option value="5">5 slides</option>
+        <option value="10" selected>10 slides</option>
+        <option value="15">15 slides</option>
+        <option value="20">20 slides</option>
+      </select>
+
+      <button id="generateAISlides">
+        ✦ Generate Presentation
+      </button>
+
+      <p id="aiGeneratorStatus"></p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- END AI SLIDE GENERATOR WORKSPACE -->
+
+
 <!-- END NEW HOME INTERFACE -->
 
 <header class="top">
