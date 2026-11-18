@@ -550,3 +550,133 @@ body.editor-mode .template-screen {
   .creation-grid { gap: 13px 3px; }
   .create-icon { width: 43px; height: 43px; }
 }
+
+/* =====================================
+   AI SLIDE GENERATOR WORKSPACE
+===================================== */
+
+.ai-generator-screen {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  overflow-y: auto;
+  background: #0b1020;
+  color: #f5f7ff;
+  padding-bottom: 35px;
+}
+
+.ai-generator-screen.open {
+  display: block;
+}
+
+.ai-generator-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 18px;
+  background: #151d32;
+  border-bottom: 1px solid #2b3854;
+}
+
+.ai-generator-header button {
+  background: #26334e;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-size: 20px;
+}
+
+.ai-generator-header h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.ai-generator-header small {
+  color: #aab5ce;
+}
+
+.ai-generator-header > span {
+  margin-left: auto;
+  color: #6ee7d2;
+  font-size: 25px;
+}
+
+.ai-generator-content {
+  width: min(100% - 30px, 750px);
+  margin: 35px auto;
+}
+
+.ai-generator-welcome {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.ai-generator-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 65px;
+  height: 65px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #8b7cff, #6ee7d2);
+  color: #101426;
+  font-size: 32px;
+}
+
+.ai-generator-welcome h1 {
+  font-size: clamp(24px, 5vw, 36px);
+  margin: 20px 0 10px;
+}
+
+.ai-generator-welcome p {
+  color: #aab5ce;
+  line-height: 1.7;
+}
+
+.ai-generator-card {
+  padding: 22px;
+  background: #151d32;
+  border: 1px solid #2b3854;
+  border-radius: 20px;
+}
+
+.ai-generator-card label {
+  display: block;
+  margin: 18px 0 9px;
+  font-weight: 600;
+}
+
+.ai-generator-card textarea,
+.ai-generator-card select {
+  width: 100%;
+  padding: 14px;
+  background: #0b1020;
+  color: #f5f7ff;
+  border: 1px solid #35445f;
+  border-radius: 11px;
+  font: inherit;
+}
+
+.ai-generator-card textarea {
+  min-height: 145px;
+  resize: vertical;
+}
+
+.ai-generator-card button {
+  width: 100%;
+  margin-top: 25px;
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #8b7cff, #6ee7d2);
+  color: #101426;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+#aiGeneratorStatus {
+  color: #6ee7d2;
+  text-align: center;
+  line-height: 1.6;
+}
