@@ -339,3 +339,99 @@ body.editor-mode .canvas-wrap {
     font-size: 10px;
   }
 }
+
+
+/* =========================================
+   GIDY STUDIO V11 — HYBRID MOBILE EDITOR
+   Bottom tool navigation + expandable panel
+========================================= */
+
+@media (max-width: 650px) {
+
+  body.editor-mode .app > .layout {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 70px);
+    padding-bottom: 0;
+  }
+
+  /* Keep the slide workspace at the top */
+  body.editor-mode .layout > .center {
+    order: 1;
+    width: 100%;
+    min-height: 50vh;
+    flex: 1 0 auto;
+  }
+
+  /* Keep slide thumbnails accessible */
+  body.editor-mode .layout > .left {
+    order: 2;
+    width: 100%;
+    max-height: 125px;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  /* Expandable editing panel */
+  body.editor-mode #editorProperties {
+    order: 3;
+    position: fixed;
+    left: 8px;
+    right: 8px;
+    bottom: 68px;
+    width: auto;
+    max-height: 42vh;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Editing controls scroll inside the panel */
+  body.editor-mode #editorProperties .editor-tab-content {
+    order: 1;
+    flex: 1;
+    min-height: 0;
+    max-height: 42vh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-bottom: 12px;
+  }
+
+  /* Six tool buttons become the bottom navigation */
+  body.editor-mode #editorProperties .editor-tabs {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 120;
+    order: 2;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 2px;
+    padding: 8px 4px calc(8px + env(safe-area-inset-bottom));
+    background: #101426;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.25);
+  }
+
+  body.editor-mode #editorProperties .editor-tab {
+    min-width: 0;
+    padding: 10px 2px;
+    font-size: 10px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  body.editor-mode #editorProperties .editor-tab.active {
+    background: rgba(129, 135, 255, 0.2);
+    color: #8187ff;
+  }
+
+  body.editor-mode #editorProperties .editor-tab-content[hidden] {
+    display: none !important;
+  }
+
+}
