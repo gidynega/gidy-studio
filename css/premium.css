@@ -329,3 +329,209 @@ body.editor-mode .layout {
 @media (prefers-reduced-motion: reduce) {
   *,*::before,*::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
 }
+
+/* =========================================
+   GIDY STUDIO — WPS-INSPIRED MOBILE EDITOR
+   VISUAL UPGRADE V13
+   Additive styles — preserves existing logic
+========================================= */
+
+@media (max-width: 700px) {
+
+  /* Main editor background */
+  body.editor-mode {
+    background: #080d18 !important;
+  }
+
+  body.editor-mode .app {
+    padding-bottom: 82px !important;
+  }
+
+  /* Compact professional top toolbar */
+  body.editor-mode .app > .top {
+    padding: 10px 12px 9px !important;
+    background: rgba(9, 15, 28, .98) !important;
+    border-bottom: 1px solid rgba(125, 155, 195, .16) !important;
+  }
+
+  body.editor-mode .brand {
+    margin-bottom: 9px !important;
+  }
+
+  body.editor-mode .brand .logo {
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 12px !important;
+  }
+
+  body.editor-mode .brand h1 {
+    font-size: 16px !important;
+    letter-spacing: -.4px;
+  }
+
+  body.editor-mode .actions {
+    gap: 7px !important;
+    padding-bottom: 5px !important;
+  }
+
+  body.editor-mode .actions button {
+    border-radius: 10px !important;
+    font-size: 11px !important;
+    padding: 9px 12px !important;
+    background: #17243a !important;
+    border: 1px solid rgba(150, 175, 215, .15) !important;
+  }
+
+  body.editor-mode .actions button.primary {
+    background: linear-gradient(120deg, #55dfd1, #9381ff) !important;
+    color: #07131c !important;
+    border: 0 !important;
+  }
+
+  /* Editor workspace */
+  body.editor-mode .layout {
+    gap: 11px !important;
+    padding: 12px 10px 0 !important;
+  }
+
+  body.editor-mode .center {
+    gap: 10px !important;
+  }
+
+  /* Slide navigation controls */
+  body.editor-mode .presentation-nav {
+    padding: 2px 0 !important;
+  }
+
+  body.editor-mode .presentation-nav button {
+    min-height: 39px;
+    border-radius: 10px !important;
+    font-size: 11px !important;
+    font-weight: 650;
+  }
+
+  /* Professional slide workspace */
+  body.editor-mode .canvas-wrap {
+    aspect-ratio: 16 / 9 !important;
+    min-height: 0 !important;
+    padding: 12px !important;
+    border-radius: 17px !important;
+    border: 1px solid rgba(145, 170, 210, .16) !important;
+    background:
+      radial-gradient(ellipse at center, #1a2942, #0b1220 78%) !important;
+    box-shadow: inset 0 0 35px rgba(0,0,0,.3);
+  }
+
+  body.editor-mode #slidePreview {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    border-radius: 5px !important;
+    box-shadow:
+      0 15px 40px rgba(0,0,0,.48),
+      0 0 0 1px rgba(255,255,255,.16) !important;
+  }
+
+  /* Slide thumbnail strip */
+  body.editor-mode .panel.left {
+    max-height: 132px !important;
+    padding: 10px !important;
+    border-radius: 15px !important;
+    background: #111c2e !important;
+    border: 1px solid rgba(145, 170, 210, .13) !important;
+  }
+
+  body.editor-mode .slide-list {
+    gap: 9px !important;
+    padding-bottom: 5px !important;
+  }
+
+  body.editor-mode .slide-item {
+    flex: 0 0 112px !important;
+    min-width: 112px !important;
+    border-radius: 11px !important;
+    background: #17243a !important;
+  }
+
+  body.editor-mode .slide-item.active {
+    background: rgba(98, 234, 219, .12) !important;
+    border: 1px solid #62eadb !important;
+  }
+
+  /* Floating editing panel */
+  body.editor-mode #editorProperties {
+    left: 8px !important;
+    right: 8px !important;
+    bottom: calc(72px + env(safe-area-inset-bottom)) !important;
+    max-height: min(39dvh, 350px) !important;
+    padding: 12px !important;
+    border-radius: 18px !important;
+    background: rgba(16, 27, 45, .98) !important;
+    border: 1px solid rgba(145, 170, 210, .19) !important;
+    box-shadow: 0 15px 45px rgba(0,0,0,.5) !important;
+  }
+
+  body.editor-mode #editorProperties > h2:first-child {
+    font-size: 12px !important;
+    letter-spacing: .04em;
+    color: #62eadb !important;
+  }
+
+  /* Persistent editing navigation */
+  body.editor-mode #editorProperties .editor-tabs {
+    background: rgba(8, 14, 26, .98) !important;
+    border-top: 1px solid rgba(145, 170, 210, .17) !important;
+    padding-top: 8px !important;
+  }
+
+  body.editor-mode #editorProperties .editor-tab {
+    min-height: 43px;
+    border-radius: 10px !important;
+    font-size: 9px !important;
+    font-weight: 650;
+    color: #a5b4cc;
+  }
+
+  body.editor-mode #editorProperties .editor-tab.active {
+    color: #62eadb !important;
+    background: rgba(98, 234, 219, .12) !important;
+    border: 1px solid rgba(98, 234, 219, .25) !important;
+  }
+
+  /* Editing fields */
+  body.editor-mode #editorProperties input,
+  body.editor-mode #editorProperties textarea,
+  body.editor-mode #editorProperties select {
+    border-radius: 10px !important;
+    background: #0b1526 !important;
+    border-color: rgba(145, 170, 210, .2) !important;
+  }
+
+  body.editor-mode #editorProperties .field button {
+    border-radius: 10px !important;
+  }
+
+}
+
+/* Smaller phone screens */
+@media (max-width: 390px) {
+
+  body.editor-mode .layout {
+    padding-left: 7px !important;
+    padding-right: 7px !important;
+  }
+
+  body.editor-mode .canvas-wrap {
+    padding: 7px !important;
+  }
+
+  body.editor-mode .slide-item {
+    flex-basis: 96px !important;
+    min-width: 96px !important;
+  }
+
+  body.editor-mode #editorProperties .editor-tab {
+    font-size: 8px !important;
+  }
+
+}
