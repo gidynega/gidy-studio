@@ -4,7 +4,6 @@
 ================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
-
   const app = document.querySelector(".app");
   const homeScreen = document.getElementById("homeScreen");
 
@@ -15,19 +14,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const ACTIVE_FILE_KEY = "gidyStudioActiveFileId";
   const DECK_TITLE_KEY = "gidyStudioDeckTitle";
 
-  const pageNames = ["Files", "Scan", "Discover", "Me"];
+  const pageNames = ["Files", "AI Studio", "Templates", "Workspace"];
   const pageLabels = {
     Files: "All Presentations & Files",
-    Scan: "AI Slide Studio & Quick Create",
-    Discover: "Templates & Study Decks",
-    Me: "Workspace & Local Vault"
+    "AI Studio": "AI Slide Studio & Quick Create",
+    Templates: "Templates & Study Decks",
+    Workspace: "Workspace & Local Vault"
   };
   const pages = {};
 
   pageNames.forEach(name => {
+    const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-") + "Page";
     const page = document.createElement("section");
     page.className = "app-page";
-    page.id = name.toLowerCase() + "Page";
+    page.id = slug;
     page.style.display = "none";
     page.style.minHeight = "100vh";
     page.style.padding = "22px 18px 115px";
@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function renderFiles() {
     const files = getFiles();
-    const container = pages.Files.querySelector(".page-content");
+    const container = pages.Files?.querySelector(".page-content");
     if (!container) return;
 
     container.innerHTML = `
@@ -382,7 +382,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  pages.Scan.querySelector(".page-content").innerHTML = `
+  pages["AI Studio"].querySelector(".page-content").innerHTML = `
     <div class="page-card">
       <h2>✦ AI Slide Studio</h2>
       <p>Generate structured lecture, research, or pitch decks from any topic or pasted study notes.</p>
@@ -393,7 +393,7 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
   `;
 
-  pages.Discover.querySelector(".page-content").innerHTML = `
+  pages.Templates.querySelector(".page-content").innerHTML = `
     <div class="page-card">
       <h2>❖ Professional Templates</h2>
       <p>Browse curated themes for Education, Science &amp; Research, Class Lessons, and Business Pitches.</p>
@@ -403,9 +403,9 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
   `;
 
-  function renderMePage() {
+  function renderWorkspacePage() {
     const count = getFiles().length;
-    pages.Me.querySelector(".page-content").innerHTML = `
+    pages.Workspace.querySelector(".page-content").innerHTML = `
       <div class="page-card">
         <h2>👤 Gidy Studio Creator Vault</h2>
         <p>Stored locally in browser storage: <b>${count}</b> saved presentation${count === 1 ? "" : "s"}. Works offline with JSON backup &amp; PPTX/PDF/PNG export.</p>
@@ -422,17 +422,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  pages.Scan.querySelector("#navOpenAI")?.addEventListener("click", () => {
+  pages["AI Studio"].querySelector("#navOpenAI")?.addEventListener("click", () => {
     document.getElementById("aiGeneratorScreen")?.classList.add("open");
   });
-  pages.Scan.querySelector("#navOpenBlank")?.addEventListener("click", () => {
+  pages["AI Studio"].querySelector("#navOpenBlank")?.addEventListener("click", () => {
     localStorage.removeItem(ACTIVE_FILE_KEY);
     localStorage.removeItem(DECK_TITLE_KEY);
     document.body.classList.remove("home-mode");
     document.body.classList.add("editor-mode");
     document.getElementById("newDeck")?.click();
   });
-  pages.Discover.querySelector("#navOpenTemplates")?.addEventListener("click", () => {
+  pages.Templates.querySelector("#navOpenTemplates")?.addEventListener("click", () => {
     const ts = document.getElementById("templateScreen");
     if (ts) {
       ts.classList.add("open");
@@ -459,7 +459,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     if (name === "Files") renderFiles();
-    if (name === "Me") renderMePage();
+    if (name === "Workspace") renderWorkspacePage();
     renderHomeFiles();
 
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -496,5 +496,4 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   showPage("Home");
-
 });
