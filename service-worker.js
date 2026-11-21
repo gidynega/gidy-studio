@@ -1,21 +1,20 @@
-/* =====================================
-   GIDY STUDIO - SERVICE WORKER
-   V13 - Reliable offline & update cache
-===================================== */
+/* =====================================================================
+   GIDY STUDIO — SERVICE WORKER (V13)
+   Pre-caches app shell + CSS/JS/icons + network-first with cache fallback
+   ===================================================================== */
 
-const CACHE_NAME = "gidy-studio-v13-cache-1";
+const CACHE_NAME = "gidy-studio-v13-shell";
 
-const APP_FILES = [
+const APP_SHELL = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
-
-  // CSS files
+  "./icons/icon-192.png",
+  "./icons/icon-512.png",
+  "./gidy-photo.jpg",
   "./css/style.css",
   "./css/home.css",
   "./css/premium.css",
-
-  // JavaScript files
   "./js/app.js",
   "./js/pwa.js",
   "./js/editor-tabs.js",
@@ -23,65 +22,61 @@ const APP_FILES = [
   "./js/home.js"
 ];
 
-self.addEventListener("install", (event) => {
+self.addEventListener("install", event => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) =>
-        cache.addAll(
-          APP_FILES.map((url) => new Request(url, { cache: "reload" }))
-        )
+    caches.open(CACHE_NAME).then(cache =>
+      cache.addAll(
+        APP_SHELL.map(url => new Request(url, { cache: "reload" }))
       )
-      .then(() => self.skipWaiting())
+    )
+  );
+  self.skipWaiting();
+});
+
+self.addEventListener("activate", event => {
+  event.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(
+        keys
+          .filter(key => key !== CACHE_NAME)
+          .map(key => caches.delete(key))
+      )
+    ).then(() => self.clients.claim())
   );
 });
 
-self.addEventListener("activate", (event) => {
-  event.waitUntil(
-    caches.keys()
-      .then((keys) =>
-        Promise.all(
-          keys
-            .filter((key) => key.startsWith("gidy-studio-") && key !== CACHE_NAME)
-            .map((key) => caches.delete(key))
-        )
-      )
-      .then(() => self.clients.claim())
-  );
-});
+self.addEventListener("fetch", event => {
+  const req = event.request;
 
-self.addEventListener("fetch", (event) => {
-  if (event.request.method !== "GET") return;
-
-  const requestURL = new URL(event.request.url);
-  if (requestURL.origin !== self.location.origin) return;
+  if (
+    req.method !== "GET" ||
+    new URL(req.url).origin !== self.location.origin
+  ) {
+    return;
+  }
 
   event.respondWith(
-    fetch(event.request)
-      .then((response) => {
+    fetch(req)
+      .then(response => {
         if (response && response.ok) {
           const copy = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+          caches.open(CACHE_NAME).then(cache => cache.put(req, copy));
         }
         return response;
       })
       .catch(async () => {
-        const cached = await caches.match(event.request, { ignoreSearch: true });
+        const cached = await caches.match(req, { ignoreSearch: true });
         if (cached) return cached;
 
-        if (event.request.mode === "navigate") {
-          const home = await caches.match("./index.html");
-          if (home) return home;
+        if (req.mode === "navigate") {
+          const fallbackIndex = await caches.match("./index.html");
+          if (fallbackIndex) return fallbackIndex;
         }
 
-        return new Response(
-          "Offline: this resource is not available yet.",
-          {
-            status: 503,
-            headers: {
-              "Content-Type": "text/plain; charset=utf-8"
-            }
-          }
-        );
+        return new Response("Offline: this resource is not cached yet.", {
+          status: 503,
+          headers: { "Content-Type": "text/plain; charset=utf-8" }
+        });
       })
   );
 });
