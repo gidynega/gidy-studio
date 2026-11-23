@@ -1,460 +1,291 @@
 /* =====================================
-   GIDY STUDIO — HOME WORKSPACE & ACTIONS
-   Templates • AI Studio • File Manager • Sheets
+   GIDY STUDIO — HOME FUNCTIONALITY
 ===================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
-  const $ = (selector, parent = document) => parent.querySelector(selector); const $$ = (selector, parent = document) => [...parent.querySelectorAll(selector)];
+  const $ = (selector, parent = document) =>
+    parent.querySelector(selector);
+
+  const $$ = (selector, parent = document) =>
+    [...parent.querySelectorAll(selector)];
 
   const home = $("#homeScreen");
   if (!home) return;
 
-  const PROJECT_KEY = "gidyStudioProject";
-  const FILES_KEY = "gidyStudioFiles";
-  const ACTIVE_FILE_KEY = "gidyStudioActiveFileId";
-  const DECK_TITLE_KEY = "gidyStudioDeckTitle";
-
   const newButton = $("#openNew");
   const newSheet = $("#newSheet");
   const fileList = $("#homeFileList");
-  const templateScreen = $("#templateScreen");
-  const aiGeneratorScreen = $("#aiGeneratorScreen");
-  const actionSheet = $("#projectActionSheet");
 
-  let selectedProjectId = null;
-  let sortMode = "newest"; // "newest" | "az"
-  let activeTabFilter = "device";
-
-  function safeParse(raw, fallback) {
-    try {
-      return raw ? JSON.parse(raw) : fallback;
-    } catch {
-      return fallback;
-    }
-  }
-
-  function getFiles() {
-    if (window.GidyLibrary?.getFiles) return window.GidyLibrary.getFiles();
-    const list = safeParse(localStorage.getItem(FILES_KEY), []);
-    return Array.isArray(list) ? list : [];
-  }
-
-  function storeFiles(files) {
-    if (window.GidyLibrary?.storeFiles) {
-      window.GidyLibrary.storeFiles(files);
-      return;
-    }
-    try {
-      localStorage.setItem(FILES_KEY, JSON.stringify(files));
-    } catch {
-      // Ignore storage quota issues
-    }
-  }
-
-  /* ---------- BOTTOM SHEET CONTROLS ---------- */
+  
+  // OPEN CREATION MENU
   function openCreationMenu() {
     if (!newSheet) return;
+
     newSheet.classList.add("open");
     newSheet.setAttribute("aria-hidden", "false");
     newSheet.style.display = "flex";
     document.body.classList.add("sheet-open");
   }
 
+  // CLOSE CREATION MENU
   function closeCreationMenu() {
     if (!newSheet) return;
+
     newSheet.classList.remove("open");
     newSheet.setAttribute("aria-hidden", "true");
     newSheet.style.display = "";
     document.body.classList.remove("sheet-open");
   }
 
-  function openProjectActionSheet(file) {
-    if (!actionSheet || !file) return;
-    selectedProjectId = file.id;
-    const titleEl = $("#projectActionTitle");
-    if (titleEl) titleEl.textContent = file.name || "Presentation Options";
 
-    const starBtn = $("#actionStarProject"); if (starBtn) { starBtn.textContent = file.starred ? "★ Remove from Starred" : "☆ Add to Starred"; }      actionSheet.classList.add("open"); actionSheet.setAttribute("aria-hidden", "false"); actionSheet.style.display = "flex"; }    function closeProjectActionSheet() { if (!actionSheet) return; actionSheet.classList.remove("open"); actionSheet.setAttribute("aria-hidden", "true"); actionSheet.style.display = ""; selectedProjectId = null; }    /* ---------- NAVIGATION HELPERS ---------- */ function switchToEditor() { closeCreationMenu(); closeProjectActionSheet(); templateScreen?.classList.remove("open"); templateScreen?.setAttribute("aria-hidden", "true"); aiGeneratorScreen?.classList.remove("open");      $$(".app-page").forEach(p => {
-      p.style.display = "none";
-      p.classList.remove("active");
-    });
+  // FIND AN EXISTING TOOL
+  function findTool(name) {
+    const target = name.toLowerCase();
 
-    document.body.classList.remove("home-mode");
-    document.body.classList.add("editor-mode");
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    return $$("[data-create], [data-tool]", newSheet || document)
+      .find(button => {
+        const value = (
+          button.dataset.create ||
+          button.dataset.tool ||
+          button.textContent
+        ).toLowerCase();
+
+        return value.includes(target);
+      });
   }
 
-  function openPresentationEditor(templateName, customTitle) {
+  // OPEN A TOOL THROUGH ITS EXISTING BUTTON
+  function launchTool(name) {
+  const tool = findTool(name);
+
+  if (tool) {
+    tool.click();
+  } else {
+    console.warn("Tool not found:", name);
+  }
+}
+ 
+  // AI SLIDES — OPEN TEMPLATE PICKER
+  const templateScreen = $("#templateScreen");
+  const aiGeneratorScreen = $("#aiGeneratorScreen");
+  const backTemplates = $("#backTemplates");
+
+  // Open AI Slides from dashboard or creation menu
+  $$('[data-open="slides"]').forEach(button => {
+    button.addEventListener("click", event => {
+      event.preventDefault();
+
+      closeCreationMenu();
+
+      templateScreen?.classList.add("open");
+      templateScreen?.setAttribute("aria-hidden", "false");
+
+      aiGeneratorScreen?.classList.remove("open");
+    });
+  });
+
+
+  // OPEN SLIDES FROM THE PLUS CREATION MENU
+  $$('[data-create="Slides"]').forEach(button => {
+    button.addEventListener("click", event => {
+      event.preventDefault();
+
+      closeCreationMenu();
+
+      templateScreen?.classList.add("open");
+      templateScreen?.setAttribute("aria-hidden", "false");
+
+      aiGeneratorScreen?.classList.remove("open");
+    });
+  });
+
+  // Return from templates to Home
+  backTemplates?.addEventListener("click", () => {
+    templateScreen?.classList.remove("open");
+    templateScreen?.setAttribute("aria-hidden", "true");
+  });
+
+  // OPEN AI GENERATOR
+  function openAIGenerator(templateName) {
+    const templateSelect = $("#aiSlideTemplate");
+
+    if (templateSelect && templateName) {
+      templateSelect.value = templateName;
+    }
+
+    templateScreen?.classList.remove("open");
+    templateScreen?.setAttribute("aria-hidden", "true");
+
+    aiGeneratorScreen?.classList.add("open");
+  }
+ 
+
+  // OPEN THE EXISTING PRESENTATION EDITOR
+  function openPresentationEditor(templateName) {
+
     const templateSelect = $("#template");
     const newDeckButton = $("#newDeck");
     const applyTemplateButton = $("#applyTemplate");
-
-    localStorage.removeItem(ACTIVE_FILE_KEY);
-    if (customTitle) {
-      localStorage.setItem(DECK_TITLE_KEY, customTitle);
-    } else {
-      localStorage.removeItem(DECK_TITLE_KEY);
-    }
 
     if (templateName && templateSelect) {
       templateSelect.value = templateName;
     }
 
-    switchToEditor();
+    templateScreen?.classList.remove("open");
+    templateScreen?.setAttribute("aria-hidden", "true");
 
+    aiGeneratorScreen?.classList.remove("open");
+
+    // Create a new presentation using existing editor logic
     newDeckButton?.click();
 
+    // Apply the selected presentation design
     if (templateName && applyTemplateButton) {
       applyTemplateButton.click();
     }
 
-    const deckHeading = $("#activeDeckTitle");
-    if (deckHeading && customTitle) {
-      deckHeading.textContent = customTitle;
-    }
+    document.body.classList.remove("home-mode");
+    document.body.classList.add("editor-mode");
   }
 
-  function openAIGenerator(presetStyle, placeholderHint) {
-    closeCreationMenu();
-    templateScreen?.classList.remove("open");
-    templateScreen?.setAttribute("aria-hidden", "true");
-
-    const audienceSelect = $("#aiAudienceStyle");
-    const topicBox = $("#aiSlideTopic"); if (audienceSelect && presetStyle) { audienceSelect.value = presetStyle; } if (topicBox && placeholderHint) { topicBox.placeholder = placeholderHint; }      aiGeneratorScreen?.classList.add("open"); }    /* ---------- LAUNCHERS & QUICK TOOLS ---------- */ $$('[data-open="slides"]').forEach(button => {
-    button.addEventListener("click", event => {
-      event.preventDefault();
-      openAIGenerator();
-    });
+  // BLANK PRESENTATION
+  $("#blankTemplate")?.addEventListener("click", () => {
+    openPresentationEditor("mint-pro");
   });
 
-  $("#openTemplatesQuick")?.addEventListener("click", () => { closeCreationMenu(); templateScreen?.classList.add("open"); templateScreen?.setAttribute("aria-hidden", "false"); });    $$('[data-create="Slides"]').forEach(button => {
-    button.addEventListener("click", event => {
-      event.preventDefault();
-      openPresentationEditor("dark-tech", "Untitled Presentation");
-    });
-  });
-
-  $$('[data-create="Docs"]').forEach(button => { button.addEventListener("click", event => { event.preventDefault(); openPresentationEditor("minimal-quote", "Outline Document"); }); });    $$
-('[data-create="Sheets"]').forEach(button => {
-    button.addEventListener("click", event => {
-      event.preventDefault();
-      openPresentationEditor("mint-pro", "Data & Charts Deck");
-      setTimeout(() => {
-        window.GidyEditorTabs?.activate("insert");
-        $("#addTable")?.click(); }, 120); }); });    // Safe, non-looping handler for quick tools & creation sheet tool buttons $$("[data-tool]").forEach(button => {
-    button.addEventListener("click", event => {
-      event.preventDefault();
-      const tool = (button.dataset.tool || "").toLowerCase();
-      closeCreationMenu();
-
-      if (tool.includes("translate")) {
-        openAIGenerator(
-          "educational",
-          "Paste your slide text here and specify target language (e.g., Translate to Afaan Oromoo, Amharic, or English)..."
-        );
-      } else if (tool.includes("study")) {
-        openAIGenerator(
-          "educational",
-          "Enter subject & grade/course topic (e.g., Grade 12 Biology — Cellular Respiration & ATP)..."
-        );
-      } else if (tool.includes("image")) {
-        openPresentationEditor("dark-tech", "Image Showcase Deck");
-        setTimeout(() => {
-          window.GidyEditorTabs?.activate("design");
-          $("#imageUpload")?.click();
-        }, 120);
-      } else if (tool.includes("pdf")) {
-        openPresentationEditor("mint-pro", "PDF Export Deck");
-      } else {
-        templateScreen?.classList.add("open");
-        templateScreen?.setAttribute("aria-hidden", "false");
-      }
-    });
-  });
-
-  // Import & Restore buttons on Home
-  $("#homeImportBtn")?.addEventListener("click", () => {
-    switchToEditor();
-    setTimeout(() => $("#importFile")?.click(), 80);
-  });
-
-  $("#homeRestoreBackup")?.addEventListener("click", () => {
-    switchToEditor();
-    setTimeout(() => $("#importFile")?.click(), 80);
-  });
-
-  // Back to Home from Editor
-  $("#backToHome")?.addEventListener("click", () => {
-    $("#save")?.click();
-    setTimeout(() => {
-      window.GidyLibrary?.showPage("Home");
-      renderWorkspaceList();
-    }, 120);
-  });
-
-  // Template Screen controls
-  $("#backTemplates")?.addEventListener("click", () => {
-    templateScreen?.classList.remove("open");
-    templateScreen?.setAttribute("aria-hidden", "true");
-  });
-
-  $("#blankTemplate")?.addEventListener("click", () => { openPresentationEditor("dark-tech", "Blank Presentation"); });    $$("[data-template]").forEach(button => {
+  // SELECT A PRESENTATION TEMPLATE
+  $$("[data-template]").forEach(button => {
     button.addEventListener("click", () => {
-      const tpl = button.dataset.template;
-      const label = button.querySelector("b")?.textContent || "New Presentation";
-      openPresentationEditor(tpl, label);
+      openPresentationEditor(button.dataset.template);
     });
   });
 
+  
+  // BACK FROM AI GENERATOR TO TEMPLATES
   $("#backAIGenerator")?.addEventListener("click", () => {
     aiGeneratorScreen?.classList.remove("open");
+
+    templateScreen?.classList.add("open");
+    templateScreen?.setAttribute("aria-hidden", "false");
   });
 
-  // Sheet open/close
+
+  // AI TRANSLATE
+  const translate = $('[data-tool="Translate"]');
+
+  translate?.addEventListener("click", event => {
+    event.preventDefault();
+    launchTool("translate");
+  });
+
+  // QUICK TOOLS
+  $$(".quick-tools button[data-tool]").forEach(button => {
+    button.addEventListener("click", event => {
+      event.preventDefault();
+
+      const toolName = button.dataset.tool;
+      launchTool(toolName);
+    });
+  });
+
+  
+  // PLUS BUTTON
   newButton?.addEventListener("click", event => {
     event.preventDefault();
     openCreationMenu();
   });
 
+  // CLOSE BUTTON
   $("#closeNew")?.addEventListener("click", closeCreationMenu);
+
+  // CLOSE WHEN BACKDROP IS TAPPED
   newSheet?.addEventListener("click", event => {
-    if (event.target === newSheet) closeCreationMenu();
+    if (event.target === newSheet) {
+      closeCreationMenu();
+    }
   });
 
-  $("#closeProjectActions")?.addEventListener("click", closeProjectActionSheet);
-  actionSheet?.addEventListener("click", event => {
-    if (event.target === actionSheet) closeProjectActionSheet();
-  });
-
+  // ESCAPE KEY CLOSES MENU
   document.addEventListener("keydown", event => {
     if (event.key === "Escape") {
       closeCreationMenu();
-      closeProjectActionSheet();
     }
   });
 
-  /* ---------- WORKSPACE FILE LIST, FILTERS & CONTEXT ACTIONS ---------- */
-  function renderWorkspaceList() {
-    if (!fileList) return;
 
-    const searchQuery = ($("#homeSearch")?.value || "").toLowerCase().trim();
-    const folderVal = $("#folderFilter")?.value || "all";
-    let files = [...getFiles()];
+  // WORKSPACE FILTERS
+  const workspaceTabs = $$("#workspaceTabs button[data-filter]");
 
-    if (activeTabFilter === "starred") {
-      files = files.filter(f => Boolean(f.starred));
-    } else if (activeTabFilter === "recent") {
-      files.sort((a, b) => new Date(b.updated || b.created || 0) - new Date(a.updated || a.created || 0));
-    }
-
-    if (folderVal !== "all") {
-      files = files.filter(f => (f.folder || "general") === folderVal);
-    }
-
-    if (searchQuery) {
-      files = files.filter(f => (f.name || "").toLowerCase().includes(searchQuery));
-    }
-
-    if (sortMode === "az") {
-      files.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
-    } else {
-      files.sort((a, b) => new Date(b.updated || b.created || 0) - new Date(a.updated || a.created || 0));
-    }
-
-    const countEl = $("#fileCount");
-    if (countEl) {
-      countEl.textContent = `${files.length} presentation${files.length === 1 ? "" : "s"}`;
-    }
-
-    fileList.innerHTML = "";
-
-    if (!files.length) {
-      if (activeTabFilter === "shared") {
-        fileList.innerHTML = `
-          <div class="home-empty-note">
-            Choose a curated template from <b>Pro Templates</b> above to start a styled presentation.
-          </div>
-        `;
-      } else {
-        fileList.innerHTML = `
-          <div class="home-empty-note">
-            No matching presentations yet. Tap <b>＋ Blank Deck</b> or <b>AI Slide Studio</b> to create one.
-          </div>
-        `;
-      }
-      return;
-    }
-
-    files.forEach(file => {
-      const row = document.createElement("div");
-      row.className = "home-file";
-      row.role = "button";
-      row.tabIndex = 0;
-
-      const slidesCount = file.project?.slides?.length || file.slideCount || 1;
-      const folderTag = (file.folder || "general").toUpperCase();
-      const starMark = file.starred ? "★ " : "";
-
-      row.innerHTML = `
-        <span class="file-type slides-type">P</span>
-        <span class="file-details">
-          <b>${starMark}${escapeHtml(file.name || "Untitled presentation")}</b>
-          <small>${slidesCount} slide${slidesCount === 1 ? "" : "s"} · ${folderTag} · ${new Date(file.updated || file.created || Date.now()).toLocaleDateString()}</small>
-        </span>
-        <button type="button" class="file-more" aria-label="More options">•••</button>
-      `;
-
-      row.addEventListener("click", event => {
-        if (event.target.closest(".file-more")) {
-          event.stopPropagation();
-          openProjectActionSheet(file);
-          return;
-        }
-        if (file.project) {
-          localStorage.setItem(PROJECT_KEY, JSON.stringify(file.project));
-        }
-        localStorage.setItem(ACTIVE_FILE_KEY, file.id);
-        localStorage.setItem(DECK_TITLE_KEY, file.name || "Untitled presentation");
-        location.reload();
-      });
-
-      fileList.appendChild(row);
-    });
-  }
-
-  function escapeHtml(str) {
-    return String(str)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
-  }
-
-  // Context action sheet buttons
-  $("#actionOpenProject")?.addEventListener("click", () => {
-    const file = getFiles().find(f => f.id === selectedProjectId);
-    if (!file) return;
-    if (file.project) localStorage.setItem(PROJECT_KEY, JSON.stringify(file.project));
-    localStorage.setItem(ACTIVE_FILE_KEY, file.id);
-    localStorage.setItem(DECK_TITLE_KEY, file.name || "Untitled presentation");
-    location.reload();
-  });
-
-  $("#actionRenameProject")?.addEventListener("click", () => {
-    const files = getFiles();
-    const file = files.find(f => f.id === selectedProjectId);
-    if (!file) return;
-    const nextName = prompt("Rename presentation:", file.name);
-    if (!nextName || !nextName.trim()) return;
-    file.name = nextName.trim();
-    file.updated = new Date().toISOString();
-    if (localStorage.getItem(ACTIVE_FILE_KEY) === file.id) {
-      localStorage.setItem(DECK_TITLE_KEY, file.name);
-    }
-    storeFiles(files);
-    closeProjectActionSheet();
-    renderWorkspaceList();
-  });
-
-  $("#actionDuplicateProject")?.addEventListener("click", () => {
-    const files = getFiles();
-    const file = files.find(f => f.id === selectedProjectId);
-    if (!file) return;
-    const copy = JSON.parse(JSON.stringify(file));
-    copy.id = "file-" + Date.now();
-    copy.name = `${file.name} (Copy)`;
-    copy.created = new Date().toISOString();
-    copy.updated = new Date().toISOString();
-    files.unshift(copy);
-    storeFiles(files);
-    closeProjectActionSheet();
-    renderWorkspaceList();
-  });
-
-  $("#actionStarProject")?.addEventListener("click", () => {
-    const files = getFiles();
-    const file = files.find(f => f.id === selectedProjectId);
-    if (!file) return;
-    file.starred = !file.starred;
-    storeFiles(files);
-    closeProjectActionSheet();
-    renderWorkspaceList();
-  });
-
-   $("#actionFolderProject")?.addEventListener("click", () => {
-    const files = getFiles();
-    const file = files.find(f => f.id === selectedProjectId);
-    if (!file) return;
-    const choice = prompt("Enter folder (general, education, business):", file.folder || "general");
-    if (!choice) return;
-    const normalized = choice.trim().toLowerCase();
-    file.folder = ["general", "education", "business"].includes(normalized) ? normalized : "general";
-    storeFiles(files);
-    closeProjectActionSheet();
-    renderWorkspaceList();
-  });
-
-  $("#actionExportProject")?.addEventListener("click", () => {
-    const file = getFiles().find(f => f.id === selectedProjectId);
-    if (!file) return;
-    const blob = new Blob([JSON.stringify(file.project || file, null, 2)], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `${(file.name || "gidy-presentation").replace(/[^a-z0-9-_]+/gi, "_")}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
-    closeProjectActionSheet();
-  });
-
-  $("#actionDeleteProject")?.addEventListener("click", () => {
-    const files = getFiles();
-    const file = files.find(f => f.id === selectedProjectId);
-    if (!file) return;
-    if (!confirm(`Delete "${file.name}" permanently?`)) return;
-    storeFiles(files.filter(f => f.id !== file.id));
-    if (localStorage.getItem(ACTIVE_FILE_KEY) === file.id) {
-      localStorage.removeItem(ACTIVE_FILE_KEY);
-    }
-    closeProjectActionSheet();
-    renderWorkspaceList();
-  });
-
-  // Workspace tabs, folder filter, sort, view mode, search
-  $$("#workspaceTabs button[data-filter]").forEach(button => {
+  workspaceTabs.forEach(button => {
     button.addEventListener("click", () => {
-      $$("#workspaceTabs button").forEach(tab => tab.classList.remove("active"));
+      workspaceTabs.forEach(tab =>
+        tab.classList.remove("active")
+      );
+
       button.classList.add("active");
-      activeTabFilter = button.dataset.filter || "device";
-      renderWorkspaceList();
+
+      const filter = button.dataset.filter;
+
+      if (fileList) {
+        fileList.dataset.activeFilter = filter;
+
+        $$(".home-file", fileList).forEach(file => {
+          const category =
+            file.dataset.filter ||
+            file.dataset.category ||
+            "device";
+
+          file.hidden =
+            category !== filter &&
+            !(filter === "device" && category === "device");
+        });
+      }
     });
   });
 
-  $("#folderFilter")?.addEventListener("change", renderWorkspaceList);
-
-  $("#sortFiles")?.addEventListener("click", () => {
-    sortMode = sortMode === "newest" ? "az" : "newest";
-    const sortBtn = $("#sortFiles");
-    if (sortBtn) sortBtn.textContent = sortMode === "newest" ? "↕ Recent" : "↕ A–Z";
-    renderWorkspaceList();
-  });
-
+  // LIST VIEW
   const listView = $("#listView");
   const gridView = $("#gridView");
 
   function setView(view) {
     if (!fileList) return;
-    const isGrid = view === "grid";
-    fileList.classList.toggle("grid-view", isGrid);
-    listView?.classList.toggle("active", !isGrid);
-    gridView?.classList.toggle("active", isGrid);
+
+    fileList.dataset.view = view;
+
+    const grid = view === "grid";
+
+    fileList.style.display = grid ? "grid" : "block";
+    fileList.style.gridTemplateColumns =
+      grid ? "repeat(2, minmax(0, 1fr))" : "";
+
+    $$(".home-file", fileList).forEach(file => {
+      file.style.borderRadius = grid ? "12px" : "0";
+      file.style.padding = grid ? "14px 8px" : "13px 4px";
+      file.style.border = grid
+        ? "1px solid #283550"
+        : "0";
+      file.style.borderBottom = grid
+        ? "1px solid #283550"
+        : "1px solid #283550";
+    });
+
+    listView?.classList.toggle("active", !grid);
+    gridView?.classList.toggle("active", grid);
   }
 
   listView?.addEventListener("click", () => setView("list"));
   gridView?.addEventListener("click", () => setView("grid"));
 
-  $("#homeSearch")?.addEventListener("input", renderWorkspaceList);
+  // SEARCH HOME FILES
+  const searchInput = $(".home-search input");
 
-  // Initial render
-  setTimeout(renderWorkspaceList, 60);
+  searchInput?.addEventListener("input", () => {
+    const query = searchInput.value.toLowerCase().trim();
+
+    $$(".home-file", fileList || document).forEach(file => {
+      file.hidden = !file.textContent.toLowerCase().includes(query);
+    });
+  });
+
+  console.log("Gidy Studio Home initialized successfully.");
 });
