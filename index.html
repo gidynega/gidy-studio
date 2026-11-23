@@ -2,21 +2,21 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#080b14">
-<meta name="description" content="Gidy Studio — Professional mobile-first presentation creation, AI slide generation, animation, and offline presenting.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101426">
+<meta name="description" content="Create, edit, animate and present professional slides with Gidy Studio.">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
-<title>Gidy Studio — Create. Animate. Present.</title>
-<link rel="stylesheet" href="css/style.css?v=13">
-<link rel="stylesheet" href="css/home.css?v=13">
-<link rel="stylesheet" href="css/premium.css?v=13">
+<title>Gidy Studio — Create. Animate. Share.</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/home.css">
+<link rel="stylesheet" href="css/premium.css?v=12">
 </head>
-<body class="home-mode dark-pro">
+<body class="home-mode">
 <div class="app">
 
 <!-- =====================================
@@ -26,27 +26,22 @@
 <section id="homeScreen" class="home-screen">
 
   <header class="home-topbar">
-    <button class="profile-avatar" id="profileButton" title="Workspace Profile">G</button>
+    <button class="profile-avatar" id="profileButton">G</button>
 
     <label class="home-search">
       <span>⌕</span>
       <input id="homeSearch" type="search"
-        placeholder="Search presentations, templates, notes...">
+        placeholder="Search your documents">
     </label>
 
-    <span id="offlineBadge" class="status-pill online" title="Connection status">● Ready</span>
-    <button class="home-icon-button" id="notificationsButton" title="Updates &amp; Tips">✦</button>
+    <button class="home-icon-button" id="notificationsButton">♧</button>
   </header>
 
   <div class="home-welcome">
     <div>
-      <p class="home-kicker">GIDY STUDIO PRO WORKSPACE</p>
+      <p class="home-kicker">YOUR CREATIVE WORKSPACE</p>
       <h1>Good day, Creator 👋</h1>
-      <p>Build, animate, and deliver studio-grade presentations anywhere.</p>
-    </div>
-    <div class="home-hero-actions">
-      <button class="hero-cta-btn primary" data-create="Slides">＋ Blank Deck</button>
-      <button class="hero-cta-btn secondary" id="homeImportBtn">↥ Import File</button>
+      <p>What would you like to create today?</p>
     </div>
   </div>
 
@@ -54,17 +49,8 @@
     <button class="feature-card feature-ai" data-open="slides">
       <span class="feature-icon">✦</span>
       <span>
-        <b>AI Slide Studio</b>
-        <small>Generate full outlines &amp; decks from any topic</small>
-      </span>
-      <span class="feature-arrow">›</span>
-    </button>
-
-    <button class="feature-card feature-templates" id="openTemplatesQuick">
-      <span class="feature-icon">❖</span>
-      <span>
-        <b>Pro Templates</b>
-        <small>Education, pitch decks &amp; dark themes</small>
+        <b>AI Slides</b>
+        <small>Turn ideas into presentations</small>
       </span>
       <span class="feature-arrow">›</span>
     </button>
@@ -73,49 +59,40 @@
       <span class="feature-icon">文</span>
       <span>
         <b>AI Translate</b>
-        <small>Translate slides across languages</small>
+        <small>Translate your documents</small>
       </span>
       <span class="feature-arrow">›</span>
     </button>
   </div>
 
   <div class="quick-tools">
-    <button data-create="Slides">New Presentation</button>
-    <button data-tool="Study Assistant">Study Deck</button>
-    <button data-tool="Edit PDF">Export PDF</button>
-    <button data-tool="Image to PDF">Images to Slides</button>
-    <button id="homeRestoreBackup">Restore Backup</button>
+    <button data-tool="Edit PDF">Edit PDF</button>
+    <button data-tool="PDF to Word">PDF to Word</button>
+    <button data-tool="PDF Signature">PDF Signature</button>
+    <button data-tool="Image to PDF">Image to PDF</button>
   </div>
 
   <section class="workspace-section">
     <div class="section-heading">
       <div>
         <h2>My workspace</h2>
-        <p>Offline-first local vault · Auto-saved</p>
+        <p>Your files, all in one place</p>
       </div>
-      <div class="workspace-heading-actions">
-        <select id="folderFilter" class="subtle-select" aria-label="Filter by folder">
-          <option value="all">All Folders</option>
-          <option value="general">General</option>
-          <option value="education">Education</option>
-          <option value="business">Business</option>
-        </select>
-        <button id="sortFiles" class="subtle-button">↕ Sort</button>
-      </div>
+      <button id="sortFiles" class="subtle-button">↕ Sort</button>
     </div>
 
     <div class="workspace-tabs" id="workspaceTabs">
       <button class="active" data-filter="device">This Device</button>
       <button data-filter="recent">Recent</button>
+      <button data-filter="shared">Shared</button>
       <button data-filter="starred">Starred</button>
-      <button data-filter="shared">Templates</button>
     </div>
 
     <div class="file-toolbar">
       <span id="fileCount">Recent files</span>
       <div>
-        <button id="listView" class="view-button active" title="List view">☰</button>
-        <button id="gridView" class="view-button" title="Grid view">▦</button>
+        <button id="listView" class="view-button active">☰</button>
+        <button id="gridView" class="view-button">▦</button>
       </div>
     </div>
 
@@ -125,49 +102,38 @@
         <span class="file-type slides-type">P</span>
         <span class="file-details">
           <b>Welcome to Gidy Studio</b>
-          <small>Presentation · Ready to edit</small>
+          <small>Presentation · On this device</small>
         </span>
         <span class="file-more">•••</span>
       </button>
 
       <div class="home-empty-note">
-        Your presentations appear here automatically as you create and edit them.
+        Your projects will appear here as you create and save them.
       </div>
 
     </div>
   </section>
 
-  <button class="home-fab" id="openNew" title="Create New">＋</button>
+  <button class="home-fab" id="openNew">＋</button>
 
 </section>
-
-<nav class="home-bottom-nav" aria-label="Primary Navigation">
-  <button class="selected" data-nav="Home"><span>⌂</span>Home</button>
-  <button data-nav="Files"><span>▤</span>Files</button>
-  <button data-nav="AI Studio"><span>✦</span>AI Studio</button>
-  <button data-nav="Templates"><span>◇</span>Templates</button>
-  <button data-nav="Workspace"><span>○</span>Workspace</button>
-</nav>
-
-<!-- PROJECT CONTEXT ACTION SHEET (RENAME / DUPLICATE / STAR / FOLDER / DELETE) -->
-<div class="new-sheet-backdrop" id="projectActionSheet" aria-hidden="true">
-  <section class="new-sheet compact-sheet" role="dialog" aria-modal="true" aria-labelledby="projectActionTitle">
-    <header>
-      <span></span>
-      <h2 id="projectActionTitle">Presentation Options</h2>
-      <button id="closeProjectActions">✕</button>
-    </header>
-    <div class="action-sheet-list">
-      <button id="actionOpenProject">▶ Open in Editor</button>
-      <button id="actionRenameProject">✎ Rename Presentation</button>
-      <button id="actionDuplicateProject">⧉ Duplicate Presentation</button>
-      <button id="actionStarProject">★ Toggle Starred</button>
-      <button id="actionFolderProject">📁 Move to Folder</button>
-      <button id="actionExportProject">⬇ Export JSON Backup</button>
-      <button id="actionDeleteProject" class="danger-text">🗑 Delete Presentation</button>
-    </div>
-  </section>
-</div>
+<nav class="home-bottom-nav">
+    <button class="selected" data-nav="Home">
+      <span>⌂</span>Home
+    </button>
+    <button data-nav="Files">
+      <span>▤</span>Files
+    </button>
+    <button data-nav="Scan">
+      <span>▣</span>Scan
+    </button>
+    <button data-nav="Discover">
+      <span>◇</span>Discover
+    </button>
+    <button data-nav="Me">
+      <span>○</span>Me
+    </button>
+  </nav>
 
 <!-- NEW CREATION BOTTOM SHEET -->
 
@@ -177,38 +143,42 @@
 
     <header>
       <span></span>
-      <h2 id="newSheetTitle">Create New</h2>
+      <h2 id="newSheetTitle">New</h2>
       <button id="closeNew">✕</button>
     </header>
 
-    <h3>Presentations</h3>
+    <h3>Documents</h3>
 
     <div class="creation-grid">
-      <button data-create="Slides"><i class="create-icon slides">P</i>Blank Slides</button>
-      <button data-open="slides"><i class="create-icon ai">✦</i>AI Slides</button>
-      <button data-template="dark-tech"><i class="create-icon online">◈</i>Dark Pitch</button>
-      <button data-template="violet-academic"><i class="create-icon study">🎓</i>Academic</button>
-      <button data-template="mint-pro"><i class="create-icon sheets">❖</i>Mint Pro</button>
-      <button data-template="sunset-story"><i class="create-icon resume">☀</i>Story Deck</button>
-      <button data-template="minimal-quote"><i class="create-icon txt">❝</i>Keynote</button>
+      <button data-create="Docs"><i class="create-icon docs">W</i>Docs</button>
+      <button data-create="Slides"><i class="create-icon slides">P</i>Slides</button>
+      <button data-create="Sheets"><i class="create-icon sheets">▦</i>Sheets</button>
+      <button data-tool="PDF"><i class="create-icon pdf">PDF</i>PDF</button>
+      <button data-tool="Resume"><i class="create-icon resume">CV</i>Resume</button>
+      <button data-tool="TXT"><i class="create-icon txt">T</i>TXT</button>
+      <button data-tool="Scan"><i class="create-icon scan">▣</i>Scan</button>
     </div>
 
-    <h3>Documents &amp; Quick Start</h3>
+    <h3>Online documents</h3>
 
     <div class="creation-grid">
-      <button data-create="Docs"><i class="create-icon docs">W</i>Outline Doc</button>
-      <button data-create="Sheets"><i class="create-icon sheets">▦</i>Data Sheet</button>
-      <button data-tool="PDF"><i class="create-icon pdf">PDF</i>PDF Deck</button>
-      <button data-tool="Study Assistant"><i class="create-icon study">✦</i>Study Guide</button>
+      <button data-tool="AirPage"><i class="create-icon online">A</i>AirPage</button>
+      <button data-tool="AirSheet"><i class="create-icon online">▦</i>AirSheet</button>
+      <button data-tool="Forms"><i class="create-icon online">☷</i>Forms</button>
+      <button data-tool="DBSheet"><i class="create-icon online">▤</i>DBSheet</button>
     </div>
 
-    <h3>Studio Tools</h3>
+    <h3>Tools</h3>
 
     <div class="creation-grid">
-      <button data-tool="Edit PDF"><i class="create-icon pdf">PDF</i>Export PDF</button>
-      <button data-tool="Image to PDF"><i class="create-icon image">▧</i>Image Import</button>
+      <button data-tool="Edit PDF"><i class="create-icon pdf">PDF</i>Edit PDF</button>
+      <button data-tool="PDF to Word"><i class="create-icon docs">W</i>PDF to Word</button>
+      <button data-tool="Image to PDF"><i class="create-icon image">▧</i>Image to PDF</button>
+      <button data-tool="PDF Forms"><i class="create-icon pdf">PDF</i>PDF Forms</button>
+      <button data-tool="Study Assistant"><i class="create-icon study">✦</i>Study Assistant</button>
       <button data-tool="Translate"><i class="create-icon translate">文</i>Translate</button>
-      <button data-tool="More"><i class="create-icon more">•••</i>All Tools</button>
+      <button data-open="slides"><i class="create-icon ai">✧</i>AI Slides</button>
+      <button data-tool="More"><i class="create-icon more">•••</i>More</button>
     </div>
 
   </section>
@@ -226,55 +196,55 @@
 
   <section>
     <div class="section-heading">
-      <h3>Start from scratch</h3>
+      <h3>Most used</h3>
     </div>
 
     <button class="blank-template" id="blankTemplate">
       <span>＋</span>
-      <b>Blank Presentation</b>
-      <small>Clean widescreen canvas ready for your ideas</small>
+      <b>Blank</b>
+      <small>Start with an empty presentation</small>
     </button>
   </section>
 
   <section>
     <div class="section-heading">
-      <h3>Education &amp; Academic</h3>
-      <button class="subtle-button" data-open="slides">AI Assist ›</button>
+      <h3>Education</h3>
+      <button class="subtle-button">More ›</button>
     </div>
 
     <div class="template-row">
       <button class="template-card education-template" data-template="violet-academic">
         <span>EDUCATION</span>
-        <b>Academic Lecture</b>
+        <b>Academic</b>
       </button>
 
       <button class="template-card science-template" data-template="mint-pro">
         <span>SCIENCE</span>
-        <b>Research &amp; Lab</b>
+        <b>Research</b>
       </button>
 
       <button class="template-card lesson-template" data-template="sunset-story">
         <span>LESSON</span>
-        <b>Study Module</b>
+        <b>Class lesson</b>
       </button>
     </div>
   </section>
 
   <section>
     <div class="section-heading">
-      <h3>Business &amp; Technology</h3>
-      <button class="subtle-button" data-open="slides">AI Assist ›</button>
+      <h3>Business</h3>
+      <button class="subtle-button">More ›</button>
     </div>
 
     <div class="template-row">
       <button class="template-card business-template" data-template="dark-tech">
-        <span>TECHNOLOGY</span>
-        <b>Modern Pitch</b>
+        <span>BUSINESS</span>
+        <b>Modern pitch</b>
       </button>
 
       <button class="template-card minimal-template" data-template="minimal-quote">
         <span>STRATEGY</span>
-        <b>Executive Brief</b>
+        <b>Key message</b>
       </button>
     </div>
   </section>
@@ -288,8 +258,8 @@
   <header class="ai-generator-header">
     <button id="backAIGenerator">←</button>
     <div>
-      <h2>AI Slide Studio</h2>
-      <small>Structured outline &amp; deck builder</small>
+      <h2>AI Slide Generator</h2>
+      <small>Create presentations with AI</small>
     </div>
     <span>✦</span>
   </header>
@@ -299,47 +269,35 @@
     <div class="ai-generator-welcome">
       <span class="ai-generator-icon">✦</span>
       <h1>What would you like to present?</h1>
-      <p>Enter a topic, lecture title, or paste raw notes to generate a structured presentation.</p>
+      <p>Describe your topic and let AI help you create a professional presentation.</p>
     </div>
 
     <div class="ai-generator-card">
 
-      <label for="aiSlideTopic">Presentation topic or raw notes</label>
+      <label for="aiSlideTopic">Presentation topic</label>
 
       <textarea
         id="aiSlideTopic"
-        placeholder="Example: Peptic Ulcer Disease — definition, etiology, clinical presentation, diagnosis, and management..."
+        placeholder="Example: Peptic Ulcer Disease — definition, causes, symptoms, diagnosis and treatment..."
       ></textarea>
 
-      <div class="ai-form-row">
-        <div>
-          <label for="aiSlideTemplate">Visual theme</label>
-          <select id="aiSlideTemplate">
-            <option value="dark-tech">Dark Technology</option>
-            <option value="mint-pro">Mint Professional</option>
-            <option value="violet-academic">Violet Academic</option>
-            <option value="sunset-story">Sunset Story</option>
-            <option value="minimal-quote">Minimal Quote</option>
-          </select>
-        </div>
+      <label for="aiSlideTemplate">Presentation design</label>
 
-        <div>
-          <label for="aiSlideCount">Slide count</label>
-          <select id="aiSlideCount">
-            <option value="5">5 slides</option>
-            <option value="8">8 slides</option>
-            <option value="10" selected>10 slides</option>
-            <option value="15">15 slides</option>
-            <option value="20">20 slides</option>
-          </select>
-        </div>
-      </div>
+      <select id="aiSlideTemplate">
+        <option value="mint-pro">Mint Professional</option>
+        <option value="dark-tech">Dark Technology</option>
+        <option value="sunset-story">Sunset Story</option>
+        <option value="violet-academic">Violet Academic</option>
+        <option value="minimal-quote">Minimal Quote</option>
+      </select>
 
-      <label for="aiAudienceStyle">Presentation style</label>
-      <select id="aiAudienceStyle">
-        <option value="educational">Educational / Lecture</option>
-        <option value="business">Executive / Pitch</option>
-        <option value="summary">Key Takeaways / Revision</option>
+      <label for="aiSlideCount">Number of slides</label>
+
+      <select id="aiSlideCount">
+        <option value="5">5 slides</option>
+        <option value="10" selected>10 slides</option>
+        <option value="15">15 slides</option>
+        <option value="20">20 slides</option>
       </select>
 
       <button id="generateAISlides">
@@ -357,83 +315,38 @@
 <!-- END AI SLIDE GENERATOR WORKSPACE -->
 
 
-<!-- =====================================
-     GIDY STUDIO — PRESENTATION EDITOR
-===================================== -->
+<!-- END NEW HOME INTERFACE -->
 
 <header class="top">
- <div class="brand">
-   <button id="backToHome" class="icon-nav-btn" title="Back to Workspace">‹</button>
-   <div class="logo">G</div>
-   <div>
-     <div class="deck-title-row">
-       <h1 id="activeDeckTitle" contenteditable="true" spellcheck="false" title="Tap to rename presentation">Gidy Studio</h1>
-       <span id="autosaveBadge" class="autosave-pill">Saved</span>
-     </div>
-     <small>Gidy Studio Pro · Offline Ready</small>
-   </div>
- </div>
+ <div class="brand"><div class="logo">G</div><div><h1>Gidy Studio</h1><small>Create · Animate · Present · V11</small></div></div>
  <div class="actions">
-  <button id="installApp" style="display:none">⬇ Install</button>
-  <button id="newDeck">＋ New</button>
-  <button id="undo" title="Undo (Ctrl+Z)">↶ Undo</button>
-  <button id="redo" title="Redo (Ctrl+Y)">↷ Redo</button>
-  <button id="save">Save</button>
-  <button id="backup">Backup</button>
-  <button id="importProject">Import</button>
-  <input id="importFile" type="file" accept="application/json,.json,.pptx" hidden>
-  <button id="exportImage" title="Export current slide as PNG">PNG</button>
-  <button id="exportPdf">PDF</button>
-  <button id="exportPpt" class="primary">Export PPTX</button>
-  <button id="shareDeck" title="Share presentation">⤴ Share</button>
+  <button id="installApp" style="display:none">⬇ Install app</button><button id="newDeck">＋ New</button><button id="undo" title="Undo last change">↶ Undo</button><button id="redo" title="Redo change">↷ Redo</button><button id="save">Save project</button><button id="backup">Backup</button><button id="importProject">Import</button><input id="importFile" type="file" accept="application/json,.json" hidden>
+  <button id="exportPpt" class="primary">Export PPTX</button><button id="exportPdf">Export PDF</button>
  </div>
 </header>
-
 <main class="layout">
  <aside class="panel left">
-  <div class="panel-header-inline">
-    <h2>Slides</h2>
-    <div class="slide-order-mini">
-      <button id="moveSlideUp" title="Move slide earlier">↑</button>
-      <button id="moveSlideDown" title="Move slide later">↓</button>
-      <button id="copySlide" title="Copy slide">⧉</button>
-      <button id="pasteSlide" title="Paste slide">📋</button>
-    </div>
-  </div>
-  <div id="slideList" class="slide-list"></div>
-  <div style="display:flex;gap:7px;margin-top:12px">
-    <button id="addSlide" class="primary" style="flex:1">＋ Add slide</button>
-    <button id="deleteSlide" class="danger">Delete</button>
-  </div>
-  <p class="hint">Auto-saved locally. Tap arrows or drag to reorder slides.</p>
+  <h2>Slides</h2><div id="slideList" class="slide-list"></div>
+  <div style="display:flex;gap:7px;margin-top:12px"><button id="addSlide" class="primary" style="flex:1">＋ Add slide</button><button id="deleteSlide" class="danger">Delete</button></div>
+  <p class="hint">Your work is saved in this browser when you tap “Save project”.</p>
  </aside>
 
 <section class="center">
 
-  <!-- PRESENTATION NAVIGATION & STAGE CONTROLS -->
+  <!-- PRESENTATION NAVIGATION -->
   <div class="toolbar presentation-nav">
-    <div class="nav-group">
-      <button id="prev">← Prev</button>
+    <div>
+      <button id="prev">← Previous</button>
       <button id="next">Next →</button>
       <button id="present" class="primary">▶ Present</button>
-      <button id="exitPresent" style="display:none">✕ Exit</button>
-    </div>
-    <div class="nav-group stage-meta-controls">
-      <select id="slideAspect" title="Slide dimensions &amp; orientation" aria-label="Slide aspect ratio">
-        <option value="16:9">16:9 Wide</option>
-        <option value="4:3">4:3 Classic</option>
-        <option value="9:16">9:16 Mobile</option>
-      </select>
-      <div class="zoom-controls" aria-label="Canvas zoom">
-        <button id="zoomOut" type="button" title="Zoom out">−</button>
-        <span id="zoomLevel">100%</span>
-        <button id="zoomIn" type="button" title="Zoom in">＋</button>
-      </div>
+      <button id="exitPresent" style="display:none">
+        ✕ Exit presentation
+      </button>
     </div>
   </div>
 
   <!-- MAIN SLIDE CANVAS -->
-  <div class="canvas-wrap" id="canvasWrap">
+  <div class="canvas-wrap">
     <article id="slidePreview" class="slide">
 
       <div class="eyebrow">GIDY STUDIO</div>
@@ -444,7 +357,8 @@
 
       <img class="slide-image" alt="Uploaded slide image">
 
-      <div id="slideMedia" class="slide-media" style="display:none"></div>
+      <div id="slideMedia" class="slide-media"
+           style="display:none"></div>
 
       <div class="shape"></div>
 
@@ -453,15 +367,10 @@
     </article>
   </div>
 
-  <!-- SPEAKER NOTES QUICK DRAWER -->
-  <div id="presenterNotesBar" class="presenter-notes-bar" hidden>
-    <strong>Speaker Notes:</strong>
-    <span id="presenterNotesText">No speaker notes for this slide.</span>
-  </div>
-
   <!-- CANVAS INFORMATION -->
   <p class="hint canvas-help">
-    Tap any element on the canvas to select, drag, or style it using the tools below.
+    Create professional presentations using the editing
+    tools in the right-side panel.
   </p>
 
   <!-- SLIDE FOOTER CONTROLS -->
@@ -470,8 +379,7 @@
       <span class="hint" id="slideCount">Slide 1 of 1</span>
     </div>
 
-    <div class="footer-slide-actions">
-      <button id="toggleNotesDrawer" type="button">📝 Notes</button>
+    <div>
       <button id="duplicate">Duplicate slide</button>
     </div>
   </div>
@@ -486,14 +394,14 @@
 
   <h2>Editing tools</h2>
 
-  <!-- RIGHT-SIDE / BOTTOM TABS -->
+  <!-- RIGHT-SIDE TABS -->
   <div class="editor-tabs" id="editorTabs">
     <button class="editor-tab active" data-editor-tab="design">🎨 Design</button>
     <button class="editor-tab" data-editor-tab="insert">＋ Insert</button>
     <button class="editor-tab" data-editor-tab="text">T Text</button>
     <button class="editor-tab" data-editor-tab="arrange">▱ Arrange</button>
-    <button class="editor-tab" data-editor-tab="animation">▶ Animate</button>
-    <button class="editor-tab" data-editor-tab="ai">✦ AI</button>
+    <button class="editor-tab" data-editor-tab="animation">▶ Animation</button>
+    <button class="editor-tab" data-editor-tab="ai">✦ AI Assistant</button>
   </div>
 
   <!-- DESIGN TAB -->
@@ -555,26 +463,6 @@
       </select>
     </div>
 
-    <div class="field">
-      <label>Custom background gradient</label>
-      <select id="bgGradient">
-        <option value="theme">Use theme default</option>
-        <option value="navy-cyber">Deep Navy &amp; Cyan</option>
-        <option value="nebula-purple">Midnight Purple</option>
-        <option value="obsidian-gold">Obsidian Slate</option>
-        <option value="emerald-wave">Emerald Matrix</option>
-      </select>
-    </div>
-
-   
-    <div class="field">
-      <label>Solid background tint</label>
-      <div class="inline-control-row">
-        <input id="bgColor" type="color" value="#0f172a">
-        <button id="applyBgAll" type="button">Apply to all slides</button>
-      </div>
-    </div>
-
     <h2>Professional templates</h2>
 
     <div class="field">
@@ -595,42 +483,16 @@
 
   <!-- INSERT TAB -->
   <section class="editor-tab-content" data-editor-panel="insert" hidden>
-    <h2>Text and shapes</h2>
+    <h2>Insert elements</h2>
 
     <div class="field">
-      <label>Elements</label>
-      <div class="button-chip-grid">
-        <button id="addText">＋ Text box</button>
-        <button id="addRect">▭ Rectangle</button>
-        <button id="addCircle">◯ Circle</button>
-        <button id="addTriangle">△ Triangle</button>
-        <button id="addArrow">➜ Arrow</button>
-        <button id="addIcon">★ Badge / Icon</button>
-      </div>
-    </div>
-
-    <h2>Tables, charts &amp; diagrams</h2>
-
-    <div class="field">
-      <label>Insert data table</label>
-      <div class="inline-control-row">
-        <input id="tableRows" type="number" min="2" max="8" value="3" aria-label="Table rows" title="Rows">
-        <span>×</span>
-        <input id="tableCols" type="number" min="2" max="6" value="3" aria-label="Table columns" title="Columns">
-        <button id="addTable" type="button">＋ Table</button>
-      </div>
-    </div>
-
-    <div class="field">
-      <label>Insert chart / diagram</label>
-      <div class="inline-control-row">
-        <select id="chartType" aria-label="Chart or diagram type">
-          <option value="bar">Bar Chart</option>
-          <option value="pie">Progress Ring</option>
-          <option value="process">3-Step Diagram</option>
-        </select>
-        <button id="addChart" type="button">＋ Visual</button>
-      </div>
+      <label>Text and shapes</label>
+      <button id="addText">＋ Text box</button>
+      <button id="addRect">▭ Rectangle</button>
+      <button id="addCircle">◯ Circle</button>
+      <button id="addTriangle">△ Triangle</button>
+      <button id="addArrow">➜ Arrow</button>
+      <button id="addIcon">★ Icon</button>
     </div>
 
     <h2>Images and backgrounds</h2>
@@ -661,7 +523,6 @@
     <div class="field">
       <label>Font family</label>
       <select id="objectFont">
-        <option value="Inter, system-ui, sans-serif">Modern Sans (Inter)</option>
         <option value="Arial">Arial</option>
         <option value="Georgia">Georgia</option>
         <option value="Verdana">Verdana</option>
@@ -682,15 +543,6 @@
     </div>
 
     <div class="field">
-      <label>Line spacing</label>
-      <select id="lineSpacing">
-        <option value="1.2">Compact (1.2)</option>
-        <option value="1.45" selected>Normal (1.45)</option>
-        <option value="1.75">Relaxed (1.75)</option>
-      </select>
-    </div>
-
-    <div class="field">
       <label>Title color</label>
       <input id="titleColor" type="color" value="#173c35">
     </div>
@@ -705,19 +557,16 @@
     </div>
 
     <div class="field">
-      <label>Style &amp; Lists</label>
-      <div class="button-chip-grid">
-        <label class="toggle-chip"><input id="titleBold" type="checkbox" checked> <b>B</b> Bold</label>
-        <label class="toggle-chip"><input id="titleItalic" type="checkbox"> <i>I</i> Italic</label>
-        <label class="toggle-chip"><input id="titleUnderline" type="checkbox"> <u>U</u> Underline</label>
-        <button id="toggleBullets" type="button">• Bullets</button>
-        <button id="toggleNumbering" type="button">1. Numbered</button>
-      </div>
+      <label><input id="titleBold" type="checkbox" checked> Bold title</label>
+    </div>
+
+    <div class="field">
+      <label><input id="titleItalic" type="checkbox"> Italic title</label>
     </div>
 
     <div class="field">
       <label>Selected object color</label>
-      <input id="objectColor" type="color" value="#22d3ee">
+      <input id="objectColor" type="color" value="#ff75c8">
     </div>
 
     <p class="mobile-note">Formatting applies to the selected slide or object.</p>
@@ -725,46 +574,11 @@
 
   <!-- ARRANGE TAB -->
   <section class="editor-tab-content" data-editor-panel="arrange" hidden>
-    <h2>Object alignment</h2>
-
-    <div class="field">
-      <div class="button-chip-grid">
-        <button type="button" data-align="left">⫷ Left</button>
-        <button type="button" data-align="center">⫸ Center</button>
-        <button type="button" data-align="right">⫹ Right</button>
-        <button type="button" data-align="top">⊤ Top</button>
-        <button type="button" data-align="middle">⊟ Middle</button>
-        <button type="button" data-align="bottom">⊥ Bottom</button>
-      </div>
-    </div>
-
-    <h2>Transform &amp; style</h2>
-
-    <div class="field">
-      <label>Rotation angle (<span id="rotationValue">0°</span>)</label>
-      <input id="objectRotation" type="range" min="-180" max="180" value="0">
-    </div>
-
-    <div class="field">
-      <label>Border &amp; shadow</label>
-      <div class="inline-control-row">
-        <input id="objectBorderColor" type="color" value="#38bdf8" title="Border color">
-        <select id="objectBorderWidth" aria-label="Border width">
-          <option value="0">No Border</option>
-          <option value="1">1px Thin</option>
-          <option value="2">2px Medium</option>
-          <option value="4">4px Bold</option>
-        </select>
-        <label class="toggle-chip"><input id="objectShadow" type="checkbox"> Shadow</label>
-      </div>
-    </div>
-
-    <h2>Layers</h2>
+    <h2>Object arrangement</h2>
 
     <div class="field">
       <button id="layerUp">Bring forward</button>
       <button id="layerDown">Send backward</button>
-      <button id="duplicateObject" type="button">Duplicate object</button>
       <button id="deleteObject" class="danger">Delete object</button>
     </div>
 
@@ -795,23 +609,9 @@
         <option value="fade">Fade</option>
         <option value="push">Push left</option>
         <option value="zoom">Zoom</option>
-        <option value="flip">3D Flip</option>
         <option value="none">None</option>
       </select>
     </div>
-
-    <div class="field">
-      <label>Transition speed</label>
-      <select id="transitionDuration">
-        <option value="0.3">Fast (0.3s)</option>
-        <option value="0.55" selected>Smooth (0.55s)</option>
-        <option value="0.9">Cinematic (0.9s)</option>
-      </select>
-    </div>
-
-    <button id="applyTransitionAll" type="button" style="width:100%">
-      Apply transition to all slides
-    </button>
 
     <h2>Object animation</h2>
 
@@ -822,17 +622,7 @@
         <option value="rise">Rise</option>
         <option value="zoom">Zoom</option>
         <option value="slide">Slide in</option>
-        <option value="bounce">Pop bounce</option>
         <option value="none">None</option>
-      </select>
-    </div>
-
-    <div class="field">
-      <label>Animation delay</label>
-      <select id="animationDelay">
-        <option value="0">Immediate (0s)</option>
-        <option value="0.2">Short (0.2s)</option>
-        <option value="0.45">Staggered (0.45s)</option>
       </select>
     </div>
 
@@ -845,7 +635,7 @@
   <section class="editor-tab-content" data-editor-panel="ai" hidden>
     <h2>AI presentation assistant</h2>
 
-    <div class="field">
+<div class="field">
       <label>Describe your presentation topic</label>
       <textarea id="prompt" placeholder="Example: Peptic Ulcer Disease — definition, causes, diagnosis and treatment"></textarea>
     </div>
@@ -854,32 +644,21 @@
       ✦ Generate slide outline
     </button>
 
-    <h2>Smart slide actions</h2>
-
-    <div class="field">
-      <div class="button-chip-grid">
-        <button id="aiImproveText" type="button">✨ Polish Slide Text</button>
-        <button id="aiSummarizeSlide" type="button">☷ Summarize to Bullets</button>
-        <button id="aiSuggestLayout" type="button">❖ Auto-Pick Layout</button>
-        <button id="aiStudyQuiz" type="button">🎓 Add Review Question</button>
-      </div>
-    </div>
-
-    <p class="hint">Works offline using Gidy Studio's structured deck engine, or connects to cloud AI when configured.</p>
+    <p class="hint">Create a structured presentation outline.</p>
   </section>
 
 </aside>
 
 </main>
-<footer class="bottom">Gidy Studio Pro · Offline-First Presentation Suite · Templates, AI Outline Engine, Tables &amp; Charts, Transitions, Speaker Notes, PPTX/PDF/PNG Export &amp; JSON Vault</footer>
+<footer class="bottom">Gidy Studio V11 · Media playback, presenter mode, speaker notes, slide transitions, grid snapping, alignment guides, editable object colors, text boxes, shapes, layers & project backup · Audio/video preview (files up to 3 MB per slide); media is saved in JSON project backups. Media playback is not embedded in PPTX/PDF exports yet. Your projects stay on this device unless you export or connect cloud storage.</footer>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="js/app.js?v=13" defer></script>
-<script src="js/editor-tabs.js?v=13" defer></script>
-<script src="js/pwa.js?v=13" defer></script>
-<script src="js/navigation.js?v=13" defer></script>
-<script src="js/home.js?v=13" defer></script>
+<script src="js/app.js" defer></script>
+<script src="js/editor-tabs.js" defer></script>
+<script src="js/pwa.js" defer></script>
+<script src="js/navigation.js" defer></script>
+<script src="js/home.js" defer></script>
 </body>
 </html>
