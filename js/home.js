@@ -189,6 +189,66 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   
+  // =====================================
+  // GIDY SHEETS — INDEPENDENT NAVIGATION
+  // =====================================
+
+  const sheetsScreen = $("#sheetsScreen");
+  const sheetsBackHome = $("#sheetsBackHome");
+  const homeBottomNav = $(".home-bottom-nav");
+  const presentationHeader = $(".top");
+  const presentationLayout = $(".layout");
+  const presentationFooter = $(".bottom");
+
+  // OPEN SHEETS FROM THE PLUS MENU
+  $$('[data-create="Sheets"]').forEach(button => {
+    button.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+
+      closeCreationMenu();
+
+      templateScreen?.classList.remove("open");
+      templateScreen?.setAttribute("aria-hidden", "true");
+
+      aiGeneratorScreen?.classList.remove("open");
+      docsScreen?.setAttribute("hidden", "");
+
+      home.hidden = true;
+
+      if (homeBottomNav) homeBottomNav.hidden = true;
+
+      if (presentationHeader) presentationHeader.hidden = true;
+      if (presentationLayout) presentationLayout.hidden = true;
+      if (presentationFooter) presentationFooter.hidden = true;
+
+      if (sheetsScreen) sheetsScreen.hidden = false;
+
+      document.body.classList.remove("home-mode");
+      document.body.classList.remove("editor-mode");
+      document.body.classList.add("sheets-mode");
+
+      console.log("Gidy Sheets opened.");
+    });
+  });
+
+  // RETURN FROM SHEETS TO HOME
+  sheetsBackHome?.addEventListener("click", () => {
+    if (sheetsScreen) sheetsScreen.hidden = true;
+
+    home.hidden = false;
+
+    if (homeBottomNav) homeBottomNav.hidden = false;
+
+    if (presentationHeader) presentationHeader.hidden = false;
+    if (presentationLayout) presentationLayout.hidden = false;
+    if (presentationFooter) presentationFooter.hidden = false;
+
+    document.body.classList.remove("sheets-mode");
+    document.body.classList.remove("editor-mode");
+    document.body.classList.add("home-mode");
+  });
+
   // PLUS BUTTON
   newButton?.addEventListener("click", event => {
     event.preventDefault();
