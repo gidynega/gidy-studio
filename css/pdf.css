@@ -339,3 +339,32 @@
     height: 500px;
   }
 }
+
+/* ==========================================
+   PDF WORKSPACE — FULL SCREEN ISOLATION
+========================================== */
+
+body.pdf-mode {
+  overflow: hidden !important;
+}
+
+body.pdf-mode .app > .top,
+body.pdf-mode .app > .layout,
+body.pdf-mode .app > .bottom,
+body.pdf-mode #homeScreen,
+body.pdf-mode .home-bottom-nav,
+body.pdf-mode #newSheet,
+body.pdf-mode #templateScreen,
+body.pdf-mode #aiGeneratorScreen,
+body.pdf-mode #docsScreen,
+body.pdf-mode #sheetsScreen {
+  display: none !important;
+}
+
+body.pdf-mode #pdfScreen {
+  display: block !important;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+
