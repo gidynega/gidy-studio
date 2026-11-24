@@ -1,0 +1,288 @@
+
+/* ==========================================
+   GIDY STUDIO — DOCS WORKSPACE
+   Independent document editor
+========================================== */
+
+body.docs-mode {
+  background: #080d18 !important;
+}
+
+body.docs-mode .app {
+  width: 100%;
+  max-width: 1200px;
+  min-height: 100dvh;
+  margin: auto;
+  padding: 0;
+}
+
+body.docs-mode #homeScreen,
+body.docs-mode .home-bottom-nav,
+body.docs-mode #newSheet,
+body.docs-mode #templateScreen,
+body.docs-mode #aiGeneratorScreen,
+body.docs-mode .app > .top,
+body.docs-mode .app > .layout,
+body.docs-mode .app > .bottom {
+  display: none !important;
+}
+
+#docsScreen {
+  display: none;
+  min-height: 100dvh;
+  color: #f4f7ff;
+  padding-bottom: 35px;
+}
+
+body.docs-mode #docsScreen {
+  display: block;
+}
+
+.docs-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 16px;
+  background: rgba(12, 21, 37, .97);
+  border-bottom: 1px solid #283750;
+  backdrop-filter: blur(16px);
+}
+
+.docs-back {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  font-size: 21px;
+}
+
+.docs-brand {
+  flex: 1;
+  min-width: 0;
+}
+
+.docs-brand h1 {
+  margin: 0;
+  font-size: 17px;
+}
+
+.docs-brand small {
+  color: #94a6c2;
+  font-size: 10px;
+}
+
+.docs-header-actions {
+  display: flex;
+  gap: 7px;
+}
+
+.docs-header-actions button {
+  padding: 9px 11px;
+  font-size: 12px;
+}
+
+.docs-toolbar {
+  position: sticky;
+  top: 68px;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+  padding: 12px;
+  background: #111c30;
+  border-bottom: 1px solid #283750;
+}
+
+.docs-toolbar button,
+.docs-toolbar select,
+.docs-toolbar input {
+  min-height: 38px;
+  width: auto;
+  padding: 7px 11px;
+  border-radius: 9px;
+}
+
+.docs-toolbar button {
+  min-width: 38px;
+  font-weight: 650;
+}
+
+.docs-toolbar button.active {
+  background: #245b62;
+  border-color: #62eadb;
+}
+
+.docs-toolbar select {
+  max-width: 130px;
+}
+
+.docs-workspace {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 15px;
+  padding: 18px;
+}
+
+.docs-sidebar {
+  padding: 14px;
+  border: 1px solid #293952;
+  border-radius: 15px;
+  background: #111c30;
+  height: fit-content;
+}
+
+.docs-sidebar h2 {
+  font-size: 13px;
+  margin: 0 0 12px;
+}
+
+.docs-sidebar button {
+  width: 100%;
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+.docs-file-list {
+  display: grid;
+  gap: 7px;
+  margin-top: 14px;
+}
+
+.docs-file-item {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #293952;
+  border-radius: 10px;
+  background: #17243a;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.docs-file-item.active {
+  border-color: #62eadb;
+}
+
+.docs-main {
+  min-width: 0;
+}
+
+.docs-title-input {
+  width: 100%;
+  margin-bottom: 13px;
+  font-size: 17px;
+  font-weight: 700;
+  background: transparent;
+  border: 1px solid #293952;
+  padding: 12px;
+}
+
+.docs-paper {
+  width: 100%;
+  min-height: 700px;
+  padding: 55px;
+  background: #ffffff;
+  color: #202633;
+  border-radius: 5px;
+  box-shadow: 0 15px 45px #0005;
+  outline: none;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+
+.docs-paper:focus {
+  outline: 2px solid #62eadb;
+}
+
+.docs-paper h1,
+.docs-paper h2,
+.docs-paper h3 {
+  color: #172b46;
+}
+
+.docs-paper p {
+  margin: 0 0 12px;
+}
+
+.docs-status {
+  min-height: 22px;
+  padding: 8px 3px;
+  color: #62eadb;
+  font-size: 12px;
+}
+
+@media(max-width:700px) {
+  .docs-header {
+    padding: 9px;
+    gap: 8px;
+  }
+
+  .docs-brand h1 {
+    font-size: 15px;
+  }
+
+  .docs-header-actions button {
+    padding: 8px;
+    font-size: 11px;
+  }
+
+  .docs-toolbar {
+    top: 60px;
+    gap: 5px;
+    padding: 9px;
+  }
+
+  .docs-toolbar button {
+    min-width: 34px;
+    padding: 7px;
+    font-size: 12px;
+  }
+
+  .docs-workspace {
+    grid-template-columns: 1fr;
+    padding: 10px;
+  }
+
+  .docs-sidebar {
+    order: 2;
+  }
+
+  .docs-main {
+    order: 1;
+  }
+
+  .docs-paper {
+    min-height: 580px;
+    padding: 25px 19px;
+    font-size: 15px;
+  }
+}
+
+@media print {
+  body.docs-mode * {
+    visibility: hidden !important;
+  }
+
+  body.docs-mode #docsScreen,
+  body.docs-mode #docsScreen .docs-paper,
+  body.docs-mode #docsScreen .docs-paper * {
+    visibility: visible !important;
+  }
+
+  body.docs-mode #docsScreen .docs-paper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 0;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+  }
+}
