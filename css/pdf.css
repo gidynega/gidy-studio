@@ -1,0 +1,341 @@
+
+/* ==========================================
+   GIDY PDF — PROFESSIONAL WORKSPACE
+========================================== */
+
+.pdf-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 100dvh;
+  overflow-y: auto;
+  background: #0b1020;
+  color: #eef3ff;
+  font-family: Arial, sans-serif;
+}
+
+.pdf-screen[hidden] {
+  display: none !important;
+}
+
+/* HEADER */
+
+.pdf-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  min-height: 68px;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(16, 23, 43, 0.97);
+  border-bottom: 1px solid #26314d;
+  backdrop-filter: blur(16px);
+}
+
+.pdf-header button,
+.pdf-header-actions button {
+  border: 1px solid #35415e;
+  background: #1a2540;
+  color: #eaf4ff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#pdfBackHome {
+  font-size: 21px;
+}
+
+.pdf-brand {
+  flex: 1;
+  min-width: 0;
+}
+
+.pdf-brand h1 {
+  margin: 0;
+  font-size: 20px;
+  color: #65eee4;
+}
+
+.pdf-brand small {
+  color: #94a5c5;
+  font-size: 11px;
+}
+
+.pdf-header-actions {
+  display: flex;
+  gap: 7px;
+}
+
+#pdfDownload {
+  background: linear-gradient(135deg, #6559e8, #00b9c7);
+  border: none;
+}
+
+#pdfDownload:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* MAIN */
+
+.pdf-main {
+  width: min(1100px, 100%);
+  margin: auto;
+  padding: 24px;
+}
+
+.pdf-welcome {
+  padding: 34px 20px;
+  text-align: center;
+  border: 1px solid #303c60;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at top right, #26336a 0, transparent 45%),
+    linear-gradient(145deg, #172442, #111a30);
+}
+
+.pdf-icon {
+  width: 66px;
+  height: 76px;
+  margin: 0 auto 18px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #ff667f, #e63b64);
+  box-shadow: 0 12px 30px #e63b6433;
+  color: white;
+  font-size: 19px;
+  font-weight: 900;
+}
+
+.pdf-welcome h2 {
+  margin: 0 0 10px;
+  font-size: 25px;
+}
+
+.pdf-welcome p {
+  color: #aab8d4;
+  line-height: 1.6;
+}
+
+.pdf-welcome button,
+#pdfCreateFromText {
+  margin-top: 12px;
+  padding: 13px 20px;
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #7665f5, #11bdc9);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* TOOLS */
+
+.pdf-tools {
+  margin-top: 30px;
+}
+
+.pdf-tools h2,
+.pdf-create-section h2 {
+  font-size: 19px;
+  margin-bottom: 16px;
+}
+
+.pdf-tool-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 13px;
+}
+
+.pdf-tool-grid button {
+  min-width: 0;
+  padding: 19px 12px;
+  text-align: left;
+  border: 1px solid #303b58;
+  border-radius: 16px;
+  background: #151f37;
+  color: #eef3ff;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.pdf-tool-grid button:hover {
+  border-color: #65eee4;
+  transform: translateY(-3px);
+}
+
+.pdf-tool-grid span {
+  display: block;
+  margin-bottom: 14px;
+  font-size: 27px;
+}
+
+.pdf-tool-grid b,
+.pdf-tool-grid small {
+  display: block;
+}
+
+.pdf-tool-grid b {
+  font-size: 14px;
+  margin-bottom: 7px;
+}
+
+.pdf-tool-grid small {
+  color: #98a8c7;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* VIEWER */
+
+.pdf-viewer-section {
+  margin-top: 30px;
+  padding: 17px;
+  border: 1px solid #303b58;
+  border-radius: 18px;
+  background: #121b30;
+}
+
+.pdf-viewer-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.pdf-viewer-heading h2 {
+  margin: 0 0 6px;
+  font-size: 17px;
+}
+
+.pdf-viewer-heading small {
+  color: #9caccb;
+}
+
+#pdfCloseFile {
+  border: 1px solid #35415e;
+  background: #202c45;
+  color: white;
+  padding: 9px 12px;
+  border-radius: 9px;
+}
+
+.pdf-empty-state {
+  min-height: 230px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #9caccb;
+}
+
+.pdf-empty-state span {
+  font-size: 42px;
+}
+
+.pdf-empty-state h3 {
+  color: #edf3ff;
+  margin-bottom: 4px;
+}
+
+.pdf-screen iframe {
+  width: 100%;
+  height: 650px;
+  border: 0;
+  border-radius: 10px;
+  background: white;
+}
+
+/* CREATE PDF */
+
+.pdf-create-section {
+  margin: 30px 0;
+  padding: 20px;
+  border: 1px solid #303b58;
+  border-radius: 18px;
+  background: #151f37;
+}
+
+.pdf-create-section input,
+.pdf-create-section textarea {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 0 13px;
+  padding: 13px;
+  border: 1px solid #35415e;
+  border-radius: 10px;
+  outline: none;
+  background: #0c1427;
+  color: white;
+  font: inherit;
+}
+
+.pdf-create-section input:focus,
+.pdf-create-section textarea:focus {
+  border-color: #65eee4;
+}
+
+.pdf-create-section textarea {
+  min-height: 180px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+#pdfCreateStatus {
+  color: #65eee4;
+  font-size: 13px;
+}
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+  .pdf-header {
+    padding: 10px;
+    gap: 8px;
+  }
+
+  .pdf-brand h1 {
+    font-size: 17px;
+  }
+
+  .pdf-header-actions button {
+    padding: 9px 8px;
+    font-size: 11px;
+  }
+
+  .pdf-main {
+    padding: 15px;
+  }
+
+  .pdf-welcome {
+    padding: 27px 14px;
+  }
+
+  .pdf-welcome h2 {
+    font-size: 21px;
+  }
+
+  .pdf-tool-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .pdf-tool-grid button {
+    padding: 15px 11px;
+  }
+
+  .pdf-viewer-section {
+    padding: 12px;
+  }
+
+  .pdf-screen iframe {
+    height: 500px;
+  }
+}
