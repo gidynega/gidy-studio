@@ -1,0 +1,136 @@
+
+/* ==========================================
+   GIDY SHEETS — PROFESSIONAL WORKSPACE
+========================================== */
+
+#sheetsScreen {
+  min-height: 100vh;
+  padding: 12px;
+  box-sizing: border-box;
+  background: #0b0b18;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.sheets-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px;
+  background: #17172b;
+  border: 1px solid #30304b;
+  border-radius: 14px;
+}
+
+.sheets-header h1 {
+  margin: 0;
+  font-size: 21px;
+  color: #65eee4;
+}
+
+.sheets-header small {
+  color: #aaaac2;
+}
+
+.sheets-header button,
+.sheets-toolbar button,
+.sheets-formula-bar button {
+  padding: 10px 13px;
+  border: 1px solid #454568;
+  border-radius: 8px;
+  background: #242442;
+  color: white;
+  cursor: pointer;
+}
+
+.sheets-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 14px 0;
+}
+
+.sheets-formula-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.sheets-formula-bar input {
+  min-width: 0;
+  padding: 11px;
+  border: 1px solid #454568;
+  border-radius: 8px;
+  background: #17172b;
+  color: white;
+}
+
+#sheetsCellAddress {
+  width: 55px;
+}
+
+#sheetsFormula {
+  flex: 1;
+}
+
+.sheets-main {
+  padding: 12px;
+  overflow: hidden;
+  border: 1px solid #30304b;
+  border-radius: 14px;
+  background: #17172b;
+}
+
+.sheets-grid-container {
+  max-height: 70vh;
+  overflow: auto;
+}
+
+#sheetsGrid {
+  width: 100%;
+  min-width: 550px;
+  border-collapse: collapse;
+  background: #fff;
+  color: #202020;
+}
+
+#sheetsGrid th,
+#sheetsGrid td {
+  min-width: 90px;
+  height: 38px;
+  padding: 6px;
+  border: 1px solid #d1d5db;
+  text-align: left;
+}
+
+#sheetsGrid th {
+  background: #e5e7eb;
+  text-align: center;
+}
+
+#sheetsGrid td:focus {
+  outline: 2px solid #8187ff;
+  outline-offset: -2px;
+}
+
+#sheetsStatus {
+  padding: 12px 2px;
+  color: #65eee4;
+  font-size: 13px;
+}
+
+@media (max-width: 600px) {
+  .sheets-header {
+    flex-wrap: wrap;
+  }
+
+  .sheets-header h1 {
+    font-size: 18px;
+  }
+
+  .sheets-toolbar button {
+    padding: 8px;
+    font-size: 12px;
+  }
+}
