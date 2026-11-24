@@ -194,6 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // =====================================
 
   const sheetsScreen = $("#sheetsScreen");
+  const docsScreen = $("#docsScreen");
   const sheetsBackHome = $("#sheetsBackHome");
   const homeBottomNav = $(".home-bottom-nav");
   const presentationHeader = $(".top");
