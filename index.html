@@ -411,6 +411,104 @@
 
 </section>
 <!-- END GIDY DOCS WORKSPACE -->
+
+
+<!-- GIDY SHEETS WORKSPACE -->
+<section id="sheetsScreen" aria-label="Sheets workspace" hidden>
+
+  <header class="sheets-header">
+    <button type="button" id="sheetsBackHome">←</button>
+
+    <div>
+      <h1>Gidy Sheets</h1>
+      <small>Spreadsheet workspace</small>
+    </div>
+
+    <div>
+      <button type="button" id="sheetsSave">Save</button>
+      <button type="button" id="sheetsExport">Export</button>
+    </div>
+  </header>
+
+  <div class="sheets-toolbar">
+    <button type="button" id="sheetsAddRow">＋ Row</button>
+    <button type="button" id="sheetsAddColumn">＋ Column</button>
+    <button type="button" id="sheetsDeleteRow">− Row</button>
+    <button type="button" id="sheetsDeleteColumn">− Column</button>
+    <button type="button" id="sheetsBold"><b>B</b></button>
+    <input type="color" id="sheetsCellColor" value="#dbeafe">
+  </div>
+
+  <div class="sheets-formula-bar">
+    <input id="sheetsCellAddress" value="A1" readonly>
+    <input id="sheetsFormula" placeholder="Enter value or formula (e.g. =SUM(A1:A5))">
+    <button type="button" id="sheetsApply">Apply</button>
+  </div>
+
+  <main class="sheets-main">
+    <div class="sheets-grid-container">
+      <table id="sheetsGrid">
+        <thead>
+          <tr>
+            <th></th>
+            <th>A</th>
+            <th>B</th>
+            <th>C</th>
+            <th>D</th>
+            <th>E</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>1</th>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+          </tr>
+          <tr>
+            <th>2</th>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+          </tr>
+          <tr>
+            <th>3</th>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+          </tr>
+          <tr>
+            <th>4</th>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+          </tr>
+          <tr>
+            <th>5</th>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="sheetsStatus">Your spreadsheet is ready.</div>
+  </main>
+
+</section>
+<!-- END GIDY SHEETS WORKSPACE -->
+
 <header class="top">
  <div class="brand"><div class="logo">G</div><div><h1>Gidy Studio</h1><small>Create · Animate · Present · V11</small></div></div>
  <div class="actions">
