@@ -134,3 +134,13 @@
     font-size: 12px;
   }
 }
+
+/* Keep Sheets hidden until explicitly opened */
+#sheetsScreen[hidden] {
+  display: none !important;
+}
+
+#sheetsScreen:not([hidden]) {
+  display: block;
+}
+
