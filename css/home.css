@@ -679,3 +679,27 @@ body.editor-mode .template-screen {
   text-align: center;
   line-height: 1.6;
 }
+
+/* =====================================
+   GIDY SHEETS — ISOLATED WORKSPACE
+===================================== */
+
+body.sheets-mode #homeScreen,
+body.sheets-mode .home-bottom-nav,
+body.sheets-mode #newSheet,
+body.sheets-mode #templateScreen,
+body.sheets-mode #aiGeneratorScreen,
+body.sheets-mode #docsScreen,
+body.sheets-mode .app > .top,
+body.sheets-mode .app > .layout,
+body.sheets-mode .app > .bottom {
+  display: none !important;
+}
+
+/* Show ONLY the Sheets workspace */
+body.sheets-mode #sheetsScreen:not([hidden]) {
+  display: block !important;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
