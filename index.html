@@ -318,6 +318,99 @@
 
 <!-- END NEW HOME INTERFACE -->
 
+<!-- GIDY DOCS WORKSPACE -->
+<section id="docsScreen" aria-label="Docs workspace" hidden>
+
+  <header class="docs-header">
+    <button type="button" id="docsBackHome" class="docs-back">←</button>
+
+    <div class="docs-brand">
+      <h1>Gidy Docs</h1>
+      <small>Document workspace</small>
+    </div>
+
+    <div class="docs-header-actions">
+      <button type="button" id="docsSave">Save</button>
+      <button type="button" id="docsExport">Export</button>
+    </div>
+  </header>
+
+  <div class="docs-toolbar">
+    <select id="docsBlockType">
+      <option value="p">Paragraph</option>
+      <option value="h1">Heading 1</option>
+      <option value="h2">Heading 2</option>
+      <option value="h3">Heading 3</option>
+    </select>
+
+    <select id="docsFontSize">
+      <option value="3">Normal</option>
+      <option value="4">Large</option>
+      <option value="5">Extra large</option>
+      <option value="6">Title</option>
+      <option value="7">Huge</option>
+    </select>
+
+    <button type="button" data-doc-command="bold"><b>B</b></button>
+    <button type="button" data-doc-command="italic"><i>I</i></button>
+    <button type="button" data-doc-command="underline"><u>U</u></button>
+
+    <button type="button" data-doc-command="justifyLeft">Left</button>
+    <button type="button" data-doc-command="justifyCenter">Center</button>
+    <button type="button" data-doc-command="justifyRight">Right</button>
+
+    <button type="button" data-doc-command="insertUnorderedList">• List</button>
+    <button type="button" data-doc-command="insertOrderedList">1. List</button>
+
+    <input type="color" id="docsTextColor" value="#202020" aria-label="Text color">
+
+    <button type="button" id="docsUndo">↶</button>
+    <button type="button" id="docsRedo">↷</button>
+  </div>
+
+  <div class="docs-workspace">
+
+    <aside class="docs-sidebar">
+      <h2>MY DOCUMENTS</h2>
+
+      <button type="button" id="docsNew">＋ New document</button>
+      <button type="button" id="docsRename">✎ Rename document</button>
+
+      <div id="docsFileList" class="docs-file-list"></div>
+    </aside>
+
+    <main class="docs-main">
+
+      <input
+        type="text"
+        id="docsTitle"
+        class="docs-title-input"
+        value="Untitled document"
+        maxlength="100"
+        aria-label="Document title"
+      >
+
+      <article
+        id="docsPaper"
+        class="docs-paper"
+        contenteditable="true"
+        spellcheck="true"
+        role="textbox"
+        aria-multiline="true"
+      >
+        <h1>Welcome to Gidy Docs</h1>
+        <p>Start writing your document here...</p>
+      </article>
+
+      <div id="docsStatus" class="docs-status">
+        Your document is ready.
+      </div>
+
+    </main>
+  </div>
+
+</section>
+<!-- END GIDY DOCS WORKSPACE -->
 <header class="top">
  <div class="brand"><div class="logo">G</div><div><h1>Gidy Studio</h1><small>Create · Animate · Present · V11</small></div></div>
  <div class="actions">
