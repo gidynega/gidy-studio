@@ -510,6 +510,135 @@
 </section>
 <!-- END GIDY SHEETS WORKSPACE -->
 
+
+<!-- =====================================
+     GIDY PDF — INDEPENDENT WORKSPACE
+===================================== -->
+
+<section id="pdfScreen" class="pdf-screen" hidden>
+
+  <header class="pdf-header">
+    <button type="button" id="pdfBackHome">←</button>
+
+    <div class="pdf-brand">
+      <h1>Gidy PDF</h1>
+      <small>PDF workspace</small>
+    </div>
+
+    <div class="pdf-header-actions">
+      <button type="button" id="pdfOpenFile">Open PDF</button>
+      <button type="button" id="pdfDownload" disabled>Download</button>
+    </div>
+  </header>
+
+  <input
+    type="file"
+    id="pdfFileInput"
+    accept="application/pdf"
+    hidden
+  >
+
+  <main class="pdf-main">
+
+    <section class="pdf-welcome">
+      <div class="pdf-icon">PDF</div>
+      <h2>Welcome to Gidy PDF</h2>
+      <p>Open, view and work with your PDF documents.</p>
+
+      <button type="button" id="pdfChooseFile">
+        ＋ Open a PDF document
+      </button>
+    </section>
+
+    <section class="pdf-tools">
+
+      <h2>PDF tools</h2>
+
+      <div class="pdf-tool-grid">
+
+        <button type="button" data-pdf-tool="view">
+          <span>📄</span>
+          <b>View PDF</b>
+          <small>Open and read documents</small>
+        </button>
+
+        <button type="button" data-pdf-tool="images">
+          <span>🖼️</span>
+          <b>Images to PDF</b>
+          <small>Combine images into a PDF</small>
+        </button>
+
+        <button type="button" data-pdf-tool="text">
+          <span>✍️</span>
+          <b>Text to PDF</b>
+          <small>Create a PDF from text</small>
+        </button>
+
+        <button type="button" data-pdf-tool="print">
+          <span>🖨️</span>
+          <b>Print PDF</b>
+          <small>Print your document</small>
+        </button>
+
+      </div>
+
+    </section>
+
+    <section class="pdf-viewer-section">
+
+      <div class="pdf-viewer-heading">
+        <div>
+          <h2 id="pdfDocumentName">PDF Viewer</h2>
+          <small id="pdfStatus">No document opened</small>
+        </div>
+
+        <button type="button" id="pdfCloseFile">✕ Close</button>
+      </div>
+
+      <div id="pdfEmptyState" class="pdf-empty-state">
+        <span>📑</span>
+        <h3>No PDF selected</h3>
+        <p>Choose a PDF document to view it here.</p>
+      </div>
+
+      <iframe
+        id="pdfViewer"
+        title="PDF document viewer"
+        hidden
+      ></iframe>
+
+    </section>
+
+    <section class="pdf-create-section">
+
+      <h2>Create PDF from text</h2>
+
+      <input
+        type="text"
+        id="pdfTextTitle"
+        placeholder="Enter document title"
+      >
+
+      <textarea
+        id="pdfTextContent"
+        placeholder="Write your document content here..."
+      ></textarea>
+
+      <button type="button" id="pdfCreateFromText">
+        Create and Download PDF
+      </button>
+
+      <p id="pdfCreateStatus"></p>
+
+    </section>
+
+  </main>
+
+</section>
+
+<!-- END GIDY PDF WORKSPACE -->
+
+
 <header class="top">
  <div class="brand"><div class="logo">G</div><div><h1>Gidy Studio</h1><small>Create · Animate · Present · V11</small></div></div>
  <div class="actions">
