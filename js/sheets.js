@@ -6,6 +6,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   const $ = selector => document.querySelector(selector);
+  const $$ = selector => [...document.querySelectorAll(selector)];
 
   const screen = $("#sheetsScreen");
   const grid = $("#sheetsGrid");
@@ -283,6 +284,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
     URL.revokeObjectURL(url);
     showStatus("Spreadsheet exported.");
+  });
+  // OPEN SHEETS WORKSPACE
+  function openSheets() {
+    $("#newSheet")?.classList.remove("open");
+
+    document.body.classList.remove("home-mode", "docs-mode");
+    document.body.classList.add("sheets-mode");
+
+    screen.hidden = false;
+  }
+
+  // OPEN FROM THE CREATION MENU
+  $$('[data-create="Sheets"]').forEach(button => {
+    button.addEventListener("click", event => {
+      event.preventDefault();
+      openSheets();
+    });
   });
 
   $("#sheetsBackHome")?.addEventListener("click", () => {
