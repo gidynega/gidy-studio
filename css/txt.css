@@ -1,0 +1,107 @@
+/* ==========================================
+   GIDY TXT — TEXT EDITOR DESIGN
+========================================== */
+
+.txt-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px;
+  overflow: auto;
+  background: #101426;
+  color: #ffffff;
+  box-sizing: border-box;
+}
+
+.txt-screen[hidden] {
+  display: none !important;
+}
+
+.txt-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.txt-header h2 {
+  margin: 0;
+  color: #65eee4;
+  font-size: 22px;
+}
+
+.txt-header span {
+  color: #aab4d0;
+  font-size: 13px;
+}
+
+.txt-screen button {
+  border: 1px solid rgba(101, 238, 228, 0.25);
+  border-radius: 10px;
+  padding: 10px 14px;
+  background: #1c2740;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.txt-screen button:active {
+  transform: scale(0.97);
+}
+
+.txt-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+#txtFileName {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  border: 1px solid #303d59;
+  border-radius: 10px;
+  outline: none;
+  background: #182139;
+  color: #ffffff;
+  font-size: 15px;
+}
+
+#txtEditor {
+  flex: 1;
+  width: 100%;
+  min-height: 300px;
+  box-sizing: border-box;
+  resize: none;
+  padding: 16px;
+  border: 1px solid #303d59;
+  border-radius: 12px;
+  outline: none;
+  background: #0b1020;
+  color: #f1f5ff;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+#txtEditor:focus,
+#txtFileName:focus {
+  border-color: #65eee4;
+}
+
+.txt-footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: #aab4d0;
+  font-size: 12px;
+}
+
+.txt-footer b {
+  color: #65eee4;
+}
