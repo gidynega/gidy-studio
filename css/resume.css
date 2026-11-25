@@ -1,0 +1,331 @@
+
+/* ==========================================
+   GIDY RESUME — CV EDITOR STYLES
+   Independent and mobile-friendly workspace
+========================================== */
+
+.resume-screen {
+  min-height: 100vh;
+  padding: 18px;
+  color: #eef2ff;
+  background: #101426;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+.resume-screen[hidden] {
+  display: none !important;
+}
+
+.resume-screen *,
+.resume-screen *::before,
+.resume-screen *::after {
+  box-sizing: border-box;
+}
+
+/* HEADER */
+
+.resume-header {
+  max-width: 1450px;
+  margin: 0 auto 22px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  background: #191f35;
+  border: 1px solid #303957;
+  border-radius: 16px;
+}
+
+.resume-header h1 {
+  margin: 0;
+  font-size: 22px;
+  color: #ffffff;
+}
+
+.resume-header small {
+  display: block;
+  margin-top: 5px;
+  color: #9da9c7;
+}
+
+.resume-header button {
+  border: 1px solid #465273;
+  border-radius: 9px;
+  padding: 10px 15px;
+  color: #eef2ff;
+  background: #252e49;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.resume-header button:hover {
+  border-color: #65eee4;
+}
+
+.resume-header #resumeExport {
+  color: #081522;
+  background: #65eee4;
+  border-color: #65eee4;
+}
+
+.resume-header-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* MAIN WORKSPACE */
+
+.resume-workspace {
+  max-width: 1450px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
+  align-items: start;
+  gap: 22px;
+}
+
+.resume-editor,
+.resume-preview-panel {
+  min-width: 0;
+  padding: 20px;
+  background: #191f35;
+  border: 1px solid #303957;
+  border-radius: 16px;
+}
+
+.resume-section-heading h2,
+.resume-preview-heading h2 {
+  margin: 0 0 8px;
+  color: #65eee4;
+  font-size: 20px;
+}
+
+.resume-section-heading p {
+  margin: 0 0 20px;
+  color: #aab4ce;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* EDITOR FIELDS */
+
+.resume-editor label {
+  display: block;
+  margin: 17px 0 7px;
+  color: #dce5ff;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.resume-editor input,
+.resume-editor textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  padding: 12px 13px;
+  color: #f4f6ff;
+  background: #10172a;
+  border: 1px solid #394563;
+  border-radius: 9px;
+  outline: none;
+  font: inherit;
+  font-size: 14px;
+}
+
+.resume-editor textarea {
+  min-height: 105px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.resume-editor input:focus,
+.resume-editor textarea:focus {
+  border-color: #65eee4;
+  box-shadow: 0 0 0 2px rgba(101, 238, 228, 0.12);
+}
+
+.resume-editor input::placeholder,
+.resume-editor textarea::placeholder {
+  color: #77839f;
+}
+
+#resumeStatus {
+  margin: 18px 0 0;
+  padding: 10px 12px;
+  color: #65eee4;
+  background: rgba(101, 238, 228, 0.08);
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+/* PREVIEW PANEL */
+
+.resume-preview-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.resume-preview-heading span {
+  padding: 6px 10px;
+  color: #65eee4;
+  background: rgba(101, 238, 228, 0.1);
+  border-radius: 20px;
+  font-size: 11px;
+}
+
+/* WHITE CV PAPER */
+
+.resume-paper {
+  width: 100%;
+  min-height: 900px;
+  padding: 42px;
+  color: #202737;
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+  overflow-wrap: anywhere;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.resume-paper-header {
+  padding-bottom: 22px;
+  margin-bottom: 24px;
+  border-bottom: 2px solid #263b59;
+}
+
+.resume-paper-header h1 {
+  margin: 0 0 8px;
+  color: #172b49;
+  font-size: 30px;
+  line-height: 1.2;
+}
+
+.resume-paper-header h3 {
+  margin: 0 0 12px;
+  color: #287d89;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.resume-paper-header p {
+  margin: 5px 0;
+  color: #586273;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.resume-paper section {
+  margin: 0 0 23px;
+  page-break-inside: avoid;
+}
+
+.resume-paper section h2 {
+  margin: 0 0 10px;
+  padding-bottom: 6px;
+  color: #1d4560;
+  border-bottom: 1px solid #d9e2ea;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.resume-paper section p {
+  margin: 0;
+  color: #394252;
+  font-size: 12px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+/* RESPONSIVE LAYOUT */
+
+@media (max-width: 850px) {
+  .resume-workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .resume-preview-panel {
+    overflow: hidden;
+  }
+
+  .resume-paper {
+    min-height: 750px;
+  }
+}
+
+@media (max-width: 520px) {
+  .resume-screen {
+    padding: 10px;
+  }
+
+  .resume-header {
+    padding: 13px;
+    gap: 12px;
+  }
+
+  .resume-header h1 {
+    font-size: 19px;
+  }
+
+  .resume-header-actions {
+    width: 100%;
+  }
+
+  .resume-header-actions button {
+    flex: 1;
+  }
+
+  .resume-editor,
+  .resume-preview-panel {
+    padding: 14px;
+  }
+
+  .resume-paper {
+    padding: 24px 19px;
+    min-height: 650px;
+  }
+
+  .resume-paper-header h1 {
+    font-size: 24px;
+  }
+}
+
+/* PRINT */
+
+@media print {
+  body * {
+    visibility: hidden !important;
+  }
+
+  #resumePreview,
+  #resumePreview * {
+    visibility: visible !important;
+  }
+
+  #resumePreview {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    min-height: 0;
+    padding: 20mm;
+    color: #202737;
+    background: #ffffff;
+    box-shadow: none;
+  }
+
+  .resume-paper section {
+    break-inside: avoid;
+  }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+}
