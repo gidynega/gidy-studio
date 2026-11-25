@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const ACTIVE_FILE_KEY = "gidyStudioActiveFileId";
 
   // Create navigation pages
-  const pageNames = ["Files", "Scan", "Discover", "Me"];
+const pageNames = ["Files", "Discover", "Me"];
   const pages = {};
 
   pageNames.forEach(name => {
