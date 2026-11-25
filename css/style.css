@@ -703,3 +703,93 @@ select {
 body {
   background: #ff00ff !important;
 }
+
+/* =====================================
+   GIDY SCAN — FULL SCREEN WORKSPACE
+===================================== */
+
+#scanScreen {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  width: 100%;
+  height: 100%;
+  min-height: 100dvh;
+  overflow-y: auto;
+  background: #101426;
+  color: #ffffff;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+#scanScreen .tool-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 12px 0 20px;
+  border-bottom: 1px solid #303951;
+}
+
+#scanScreen .tool-header h2 {
+  margin: 0;
+  color: #65eee4;
+}
+
+#scanScreen .tool-header button,
+#scanScreen .scan-button,
+#scanScreen .scan-actions button {
+  padding: 12px 18px;
+  border: 1px solid #8187ff;
+  border-radius: 12px;
+  background: #222c48;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+#scanScreen .scan-container {
+  max-width: 750px;
+  margin: 35px auto;
+  text-align: center;
+}
+
+#scanScreen .scan-empty {
+  padding: 35px 15px;
+  border: 1px dashed #8187ff;
+  border-radius: 20px;
+  background: #171f37;
+}
+
+#scanScreen .scan-button {
+  display: block;
+  margin: 15px auto;
+  max-width: 250px;
+  background: linear-gradient(135deg, #6757e8, #168fba);
+}
+
+#scanScreen .scan-button.secondary {
+  background: #222c48;
+}
+
+#scanScreen #scanPreview {
+  display: block;
+  max-width: 100%;
+  max-height: 65vh;
+  margin: 20px auto;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+#scanScreen .scan-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+#scanScreen #scanStatus {
+  color: #65eee4;
+  margin-top: 20px;
+}
