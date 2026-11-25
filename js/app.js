@@ -1782,8 +1782,10 @@ if ($("shareDeck")) {
   setAutosaveBadge("Saved", false);
 })();
 
+
 /* =====================================
    GIDY SCAN — JAVASCRIPT
+   Independent Full-Screen Workspace
 ===================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -1796,81 +1798,129 @@ document.addEventListener("DOMContentLoaded", () => {
   const emptyState = document.getElementById("scanEmpty");
   const status = document.getElementById("scanStatus");
 
+  const homeScreen = document.getElementById("homeScreen");
+  const bottomNav = document.querySelector(".home-bottom-nav");
+  const newSheet = document.getElementById("newSheet");
+
   let scanImageURL = null;
 
+  // OPEN SCAN WORKSPACE
   function openScan() {
-    document.querySelectorAll(".tool-screen").forEach(screen => {
-      screen.style.display = "none";
-    });
 
-    const home = document.querySelector("main");
-    if (home) home.style.display = "none";
+    if (!scanScreen || !homeScreen) return;
+
+    homeScreen.style.display = "none";
+
+    if (bottomNav) {
+      bottomNav.style.display = "none";
+    }
+
+    if (newSheet) {
+      newSheet.style.display = "none";
+      newSheet.setAttribute("aria-hidden", "true");
+    }
 
     scanScreen.style.display = "block";
+    scanScreen.hidden = false;
+
+    window.scrollTo(0, 0);
   }
 
+  // RETURN TO HOME
   function closeScan() {
+
+    if (!scanScreen || !homeScreen) return;
+
     scanScreen.style.display = "none";
 
-    document.querySelectorAll(".tool-screen").forEach(screen => {
-      screen.style.display = "none";
-    });
+    homeScreen.style.display = "";
 
-    const home = document.querySelector("main");
-    if (home) home.style.display = "";
+    if (bottomNav) {
+      bottomNav.style.display = "";
+    }
+
+    if (newSheet) {
+      newSheet.style.display = "";
+    }
+
+    window.scrollTo(0, 0);
   }
 
+  // LOAD IMAGE
   function loadScan(file) {
-    if (!file || !file.type.startsWith("image/")) {
+
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
       status.textContent = "Please select a valid image.";
       return;
     }
 
-    if (scanImageURL) URL.revokeObjectURL(scanImageURL);
+    if (scanImageURL) {
+      URL.revokeObjectURL(scanImageURL);
+    }
 
     scanImageURL = URL.createObjectURL(file);
+
     preview.src = scanImageURL;
 
     emptyState.style.display = "none";
     previewArea.style.display = "block";
+
     status.textContent = "Document loaded successfully.";
   }
 
+  // RESET / RETAKE
   function resetScan() {
-    if (scanImageURL) URL.revokeObjectURL(scanImageURL);
+
+    if (scanImageURL) {
+      URL.revokeObjectURL(scanImageURL);
+    }
 
     scanImageURL = null;
+
     preview.src = "";
+
     cameraInput.value = "";
     uploadInput.value = "";
 
     previewArea.style.display = "none";
     emptyState.style.display = "block";
+
     status.textContent = "Ready to scan.";
   }
 
+  // DOWNLOAD SCANNED IMAGE
   function downloadScan() {
+
     if (!scanImageURL) {
       status.textContent = "Please scan a document first.";
       return;
     }
 
     const link = document.createElement("a");
+
     link.href = scanImageURL;
     link.download = "Gidy-Scanned-Document.jpg";
+
+    document.body.appendChild(link);
     link.click();
+    link.remove();
 
     status.textContent = "Download started.";
   }
 
+  // CAMERA INPUT
   cameraInput.addEventListener("change", event => {
     loadScan(event.target.files[0]);
   });
 
+  // IMAGE UPLOAD INPUT
   uploadInput.addEventListener("change", event => {
     loadScan(event.target.files[0]);
   });
 
+  // CONNECT BUTTONS
   window.openScan = openScan;
   window.closeScan = closeScan;
   window.resetScan = resetScan;
