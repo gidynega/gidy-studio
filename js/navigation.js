@@ -1,6 +1,7 @@
+
 /* =================================
    GIDY STUDIO — HOME NAVIGATION
-   Home • Files • Scan • Discover • Me
+   Home • Files • Discover • Me
 ================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -15,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const ACTIVE_FILE_KEY = "gidyStudioActiveFileId";
 
   // Create navigation pages
-const pageNames = ["Files", "Discover", "Me"];
+  const pageNames = ["Files", "Discover", "Me"];
   const pages = {};
 
   pageNames.forEach(name => {
@@ -318,13 +319,6 @@ const pageNames = ["Files", "Discover", "Me"];
   }
 
   // Other pages
-  pages.Scan.querySelector(".page-content").innerHTML = `
-    <div class="page-card">
-      <h2>📷 Scan documents</h2>
-      <p>Document scanning and image-to-PDF tools will be added here.</p>
-    </div>
-  `;
-
   pages.Discover.querySelector(".page-content").innerHTML = `
     <div class="page-card">
       <h2>✨ Discover</h2>
