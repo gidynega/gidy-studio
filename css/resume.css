@@ -329,3 +329,31 @@
     margin: 0;
   }
 }
+
+/* ==========================================
+   RESUME — STRICT FULL-SCREEN ISOLATION
+========================================== */
+
+body.resume-mode #homeScreen,
+body.resume-mode .home-bottom-nav,
+body.resume-mode #newSheet,
+body.resume-mode #templateScreen,
+body.resume-mode #aiGeneratorScreen,
+body.resume-mode #docsScreen,
+body.resume-mode #sheetsScreen,
+body.resume-mode #pdfScreen,
+body.resume-mode .app > .top,
+body.resume-mode .app > .layout,
+body.resume-mode .app > .bottom {
+  display: none !important;
+}
+
+body.resume-mode #resumeScreen:not([hidden]) {
+  display: block !important;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  z-index: 10;
+}
+
