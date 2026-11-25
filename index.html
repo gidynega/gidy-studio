@@ -762,7 +762,41 @@
 
 <!-- END GIDY RESUME WORKSPACE -->
 
+<!-- ==========================================
+     GIDY TXT — INDEPENDENT TEXT EDITOR
+========================================== -->
+<section id="txtScreen" class="txt-screen" hidden>
 
+  <header class="txt-header">
+    <button id="txtBackHome" type="button">← Home</button>
+    <h2>Gidy TXT</h2>
+    <span>Text Editor</span>
+  </header>
+
+  <div class="txt-toolbar">
+    <button id="txtNew" type="button">＋ New</button>
+    <button id="txtOpen" type="button">Open</button>
+    <button id="txtSave" type="button">Save</button>
+    <button id="txtFind" type="button">Find</button>
+    <button id="txtReplace" type="button">Replace</button>
+  </div>
+
+  <input id="txtFileName" type="text" value="Untitled.txt"
+         aria-label="File name">
+
+  <input id="txtFileInput" type="file" accept=".txt,text/plain" hidden>
+
+  <textarea id="txtEditor"
+    placeholder="Start typing your text here..."
+    spellcheck="true"></textarea>
+
+  <footer class="txt-footer">
+    <span id="txtStatus">Ready</span>
+    <span>Words: <b id="txtWordCount">0</b></span>
+    <span>Characters: <b id="txtCharCount">0</b></span>
+  </footer>
+
+</section>
 
 <header class="top">
  <div class="brand"><div class="logo">G</div><div><h1>Gidy Studio</h1><small>Create · Animate · Present · V11</small></div></div>
