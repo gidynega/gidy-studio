@@ -86,17 +86,31 @@ document.addEventListener("DOMContentLoaded", () => {
     $(id)?.addEventListener("input", updatePreview);
   });
 
+ 
   // OPEN RESUME WORKSPACE
   function openResume() {
-    if (home) home.hidden = true;
-    if (bottomNav) bottomNav.hidden = true;
-    if (topBar) topBar.hidden = true;
-    if (layout) layout.hidden = true;
-    if (footer) footer.hidden = true;
+    // Hide Home and other workspaces
+    home?.setAttribute("hidden", "");
+    bottomNav?.setAttribute("hidden", "");
+    topBar?.setAttribute("hidden", "");
+    layout?.setAttribute("hidden", "");
+    footer?.setAttribute("hidden", "");
 
+    $("docsScreen")?.setAttribute("hidden", "");
+    $("sheetsScreen")?.setAttribute("hidden", "");
+    $("pdfScreen")?.setAttribute("hidden", "");
+
+    // Show Resume only
     screen.hidden = false;
 
-    document.body.classList.remove("home-mode", "editor-mode");
+    document.body.classList.remove(
+      "home-mode",
+      "editor-mode",
+      "docs-mode",
+      "sheets-mode",
+      "pdf-mode"
+    );
+
     document.body.classList.add("resume-mode");
 
     updatePreview();
@@ -107,6 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll('[data-tool="Resume"]').forEach(button => {
     button.addEventListener("click", event => {
       event.preventDefault();
+      event.stopImmediatePropagation();
 
       document.getElementById("closeNew")?.click();
       openResume();
@@ -117,17 +132,18 @@ document.addEventListener("DOMContentLoaded", () => {
   $("resumeBackHome")?.addEventListener("click", () => {
     screen.hidden = true;
 
-    if (home) home.hidden = false;
-    if (bottomNav) bottomNav.hidden = false;
-    if (topBar) topBar.hidden = false;
-    if (layout) layout.hidden = false;
-    if (footer) footer.hidden = false;
+    home?.removeAttribute("hidden");
+    bottomNav?.removeAttribute("hidden");
+    topBar?.removeAttribute("hidden");
+    layout?.removeAttribute("hidden");
+    footer?.removeAttribute("hidden");
 
     document.body.classList.remove("resume-mode");
     document.body.classList.add("home-mode");
 
     window.scrollTo(0, 0);
   });
+
 
   // SAVE CV PROJECT
   $("resumeSave")?.addEventListener("click", () => {
