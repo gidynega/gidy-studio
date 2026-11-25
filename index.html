@@ -799,6 +799,53 @@
 
 </section>
 
+
+<!-- =====================================
+     GIDY SCAN — INDEPENDENT WORKSPACE
+===================================== -->
+<section id="scanScreen" class="tool-screen" style="display:none;">
+
+  <header class="tool-header">
+    <button onclick="closeScan()">← Home</button>
+    <h2>Gidy Scan</h2>
+    <span>Document Scanner</span>
+  </header>
+
+  <main class="scan-container">
+
+    <div class="scan-empty" id="scanEmpty">
+      <div style="font-size:60px;">📷</div>
+      <h2>Scan your documents</h2>
+      <p>Capture a document or upload an existing image.</p>
+
+      <label class="scan-button">
+        📸 Capture Document
+        <input type="file" id="scanCamera"
+          accept="image/*" capture="environment" hidden>
+      </label>
+
+      <label class="scan-button secondary">
+        🖼️ Upload Image
+        <input type="file" id="scanUpload"
+          accept="image/*" hidden>
+      </label>
+    </div>
+
+    <div id="scanPreviewArea" style="display:none;">
+      <img id="scanPreview" alt="Scanned document">
+
+      <div class="scan-actions">
+        <button onclick="resetScan()">Retake</button>
+        <button onclick="downloadScan()">Download Image</button>
+      </div>
+    </div>
+
+    <p id="scanStatus">Ready to scan.</p>
+
+  </main>
+</section>
+
+
 <header class="top">
  <div class="brand"><div class="logo">G</div><div><h1>Gidy Studio</h1><small>Create · Animate · Present · V11</small></div></div>
  <div class="actions">
