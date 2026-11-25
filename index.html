@@ -640,6 +640,129 @@
 <!-- END GIDY PDF WORKSPACE -->
 
 
+<!-- =====================================
+     GIDY RESUME — CV EDITOR WORKSPACE
+===================================== -->
+
+<section id="resumeScreen" class="resume-screen" hidden>
+
+  <header class="resume-header">
+    <button type="button" id="resumeBackHome">← Home</button>
+    <div>
+      <h1>Gidy Resume</h1>
+      <small>Professional CV Builder</small>
+    </div>
+    <div class="resume-header-actions">
+      <button type="button" id="resumeSave">Save</button>
+      <button type="button" id="resumeExport">Export PDF</button>
+    </div>
+  </header>
+
+  <main class="resume-workspace">
+
+    <section class="resume-editor">
+      <div class="resume-section-heading">
+        <h2>Edit your CV</h2>
+        <p>Enter your information. Your CV preview updates as you type.</p>
+      </div>
+
+      <label for="resumeProjectName">CV project name</label>
+      <input id="resumeProjectName" type="text" placeholder="My Professional CV">
+
+      <label for="resumeName">Full name</label>
+      <input id="resumeName" type="text" placeholder="Your full name">
+
+      <label for="resumeTitle">Professional title</label>
+      <input id="resumeTitle" type="text" placeholder="e.g. Pharmacy Student">
+
+      <label for="resumeEmail">Email address</label>
+      <input id="resumeEmail" type="email" placeholder="your@email.com">
+
+      <label for="resumePhone">Phone number</label>
+      <input id="resumePhone" type="tel" placeholder="+251 ...">
+
+      <label for="resumeLocation">Location</label>
+      <input id="resumeLocation" type="text" placeholder="City, Country">
+
+      <label for="resumeWebsite">Website or LinkedIn</label>
+      <input id="resumeWebsite" type="text" placeholder="https://...">
+
+      <label for="resumeSummary">Professional summary</label>
+      <textarea id="resumeSummary" rows="4" placeholder="Write a short professional introduction..."></textarea>
+
+      <label for="resumeExperience">Work experience</label>
+      <textarea id="resumeExperience" rows="5" placeholder="Job title, organization, dates and responsibilities..."></textarea>
+
+      <label for="resumeEducation">Education</label>
+      <textarea id="resumeEducation" rows="4" placeholder="Qualification, institution and dates..."></textarea>
+
+      <label for="resumeSkills">Skills</label>
+      <textarea id="resumeSkills" rows="4" placeholder="List your professional skills..."></textarea>
+
+      <label for="resumeProjects">Projects</label>
+      <textarea id="resumeProjects" rows="4" placeholder="Describe your projects..."></textarea>
+
+      <label for="resumeAdditional">Additional information</label>
+      <textarea id="resumeAdditional" rows="4" placeholder="Certificates, languages, achievements..."></textarea>
+
+      <p id="resumeStatus" role="status">Your CV is ready to edit.</p>
+    </section>
+
+    <section class="resume-preview-area">
+      <div class="resume-preview-heading">
+        <h2>Live CV Preview</h2>
+        <span>Preview</span>
+      </div>
+
+      <article id="resumePreview" class="resume-paper">
+
+        <header class="resume-paper-header">
+          <h1 id="previewName">Your Name</h1>
+          <h3 id="previewTitle">Your Professional Title</h3>
+          <p id="previewContact">Email · Phone · Location</p>
+          <p id="previewWebsite"></p>
+        </header>
+
+        <section id="previewSummaryBlock">
+          <h2>Professional Summary</h2>
+          <p id="previewSummary">Your professional summary will appear here.</p>
+        </section>
+
+        <section id="previewExperienceBlock">
+          <h2>Work Experience</h2>
+          <p id="previewExperience">Your work experience will appear here.</p>
+        </section>
+
+        <section id="previewEducationBlock">
+          <h2>Education</h2>
+          <p id="previewEducation">Your education will appear here.</p>
+        </section>
+
+        <section id="previewSkillsBlock">
+          <h2>Skills</h2>
+          <p id="previewSkills">Your skills will appear here.</p>
+        </section>
+
+        <section id="previewProjectsBlock">
+          <h2>Projects</h2>
+          <p id="previewProjects">Your projects will appear here.</p>
+        </section>
+
+        <section id="previewAdditionalBlock">
+          <h2>Additional Information</h2>
+          <p id="previewAdditional">Additional information will appear here.</p>
+        </section>
+
+      </article>
+    </section>
+
+  </main>
+</section>
+
+<!-- END GIDY RESUME WORKSPACE -->
+
+
+
 <header class="top">
  <div class="brand"><div class="logo">G</div><div><h1>Gidy Studio</h1><small>Create · Animate · Present · V11</small></div></div>
  <div class="actions">
