@@ -170,6 +170,34 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
+  // =====================================
+  // GIDY SCAN — INDEPENDENT NAVIGATION
+  // =====================================
+
+  function handleScanNavigation(event) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+
+    closeCreationMenu();
+
+    if (typeof window.openScan === "function") {
+      window.openScan();
+    } else {
+      console.error("Gidy Scan JavaScript is not loaded.");
+    }
+  }
+
+  // Scan from the New menu
+  $$('[data-tool="Scan"]').forEach(button => {
+    button.addEventListener("click", handleScanNavigation);
+  });
+
+  // Scan from bottom navigation
+  $$('[data-nav="Scan"]').forEach(button => {
+    button.addEventListener("click", handleScanNavigation);
+  });
+
+
   // AI TRANSLATE
   const translate = $('[data-tool="Translate"]');
 
