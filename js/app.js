@@ -1781,3 +1781,99 @@ if ($("shareDeck")) {
   updateHistoryButtons();
   setAutosaveBadge("Saved", false);
 })();
+
+/* =====================================
+   GIDY SCAN — JAVASCRIPT
+===================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const scanScreen = document.getElementById("scanScreen");
+  const cameraInput = document.getElementById("scanCamera");
+  const uploadInput = document.getElementById("scanUpload");
+  const previewArea = document.getElementById("scanPreviewArea");
+  const preview = document.getElementById("scanPreview");
+  const emptyState = document.getElementById("scanEmpty");
+  const status = document.getElementById("scanStatus");
+
+  let scanImageURL = null;
+
+  function openScan() {
+    document.querySelectorAll(".tool-screen").forEach(screen => {
+      screen.style.display = "none";
+    });
+
+    const home = document.querySelector("main");
+    if (home) home.style.display = "none";
+
+    scanScreen.style.display = "block";
+  }
+
+  function closeScan() {
+    scanScreen.style.display = "none";
+
+    document.querySelectorAll(".tool-screen").forEach(screen => {
+      screen.style.display = "none";
+    });
+
+    const home = document.querySelector("main");
+    if (home) home.style.display = "";
+  }
+
+  function loadScan(file) {
+    if (!file || !file.type.startsWith("image/")) {
+      status.textContent = "Please select a valid image.";
+      return;
+    }
+
+    if (scanImageURL) URL.revokeObjectURL(scanImageURL);
+
+    scanImageURL = URL.createObjectURL(file);
+    preview.src = scanImageURL;
+
+    emptyState.style.display = "none";
+    previewArea.style.display = "block";
+    status.textContent = "Document loaded successfully.";
+  }
+
+  function resetScan() {
+    if (scanImageURL) URL.revokeObjectURL(scanImageURL);
+
+    scanImageURL = null;
+    preview.src = "";
+    cameraInput.value = "";
+    uploadInput.value = "";
+
+    previewArea.style.display = "none";
+    emptyState.style.display = "block";
+    status.textContent = "Ready to scan.";
+  }
+
+  function downloadScan() {
+    if (!scanImageURL) {
+      status.textContent = "Please scan a document first.";
+      return;
+    }
+
+    const link = document.createElement("a");
+    link.href = scanImageURL;
+    link.download = "Gidy-Scanned-Document.jpg";
+    link.click();
+
+    status.textContent = "Download started.";
+  }
+
+  cameraInput.addEventListener("change", event => {
+    loadScan(event.target.files[0]);
+  });
+
+  uploadInput.addEventListener("change", event => {
+    loadScan(event.target.files[0]);
+  });
+
+  window.openScan = openScan;
+  window.closeScan = closeScan;
+  window.resetScan = resetScan;
+  window.downloadScan = downloadScan;
+
+});
