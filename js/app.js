@@ -1480,35 +1480,203 @@ if ($("newDeck")) {
     };
   }
 
-  if ($("generateAISlides")) {
-    $("generateAISlides").onclick = () => {
-      const topic = ($("aiSlideTopic")?.value || "").trim();
-      const statusEl = $("aiGeneratorStatus");
-      if (!topic) {
-        if (statusEl) statusEl.textContent = "Please enter a topic or notes first.";
-        return;
+ 
+// =====================================
+// GIDY STUDIO — HYBRID AI SLIDE GENERATOR
+// Local generation + optional secure AI API
+// =====================================
+
+function buildDetailedLocalDeck(topic, count, style, templateKey) {
+  const medical = /disease|medicine|pharmacy|clinical|drug|health|anatomy|physiology|pharmacology|therapy|patient|diagnosis/i.test(topic);
+
+  const business = style === "business";
+
+  const sections = business
+    ? [
+        ["INTRODUCTION", "Overview", `Introduce ${topic}, its purpose and importance.`],
+        ["PROBLEM", "The Challenge", `Explain the main problems, needs and opportunities related to ${topic}.`],
+        ["ANALYSIS", "Key Findings", `Present the major factors, evidence and considerations concerning ${topic}.`],
+        ["SOLUTION", "Proposed Strategy", `Describe practical approaches and solutions for ${topic}.`],
+        ["IMPLEMENTATION", "Action Plan", `Explain the implementation steps, resources and responsibilities.`],
+        ["EVALUATION", "Measuring Success", `Identify indicators, expected outcomes and evaluation methods.`],
+        ["CONCLUSION", "Recommendations", `Summarize the most important recommendations about ${topic}.`]
+      ]
+    : medical
+    ? [
+        ["INTRODUCTION", "Overview and Definition", `Define ${topic}, introduce its classification and explain its clinical significance.`],
+        ["ETIOLOGY", "Causes and Risk Factors", `Discuss the causes, predisposing factors and risk factors associated with ${topic}.`],
+        ["PATHOPHYSIOLOGY", "Mechanism of Disease", `Explain the biological mechanisms and step-by-step pathophysiological processes involved in ${topic}.`],
+        ["MANIFESTATIONS", "Signs and Symptoms", `Describe common clinical manifestations, characteristic symptoms and important physical findings.`],
+        ["DIAGNOSIS", "Clinical Assessment", `Discuss history taking, physical examination, laboratory investigations and diagnostic criteria.`],
+        ["MANAGEMENT", "Treatment Goals", `Explain the therapeutic goals, prevention strategies and overall management approach.`],
+        ["PHARMACOTHERAPY", "Drug Treatment", `Discuss relevant drug classes, mechanisms of action, indications and treatment selection for ${topic}.`],
+        ["SAFETY", "Contraindications and Adverse Effects", `Explain important precautions, contraindications, adverse drug effects and safety considerations.`],
+        ["MONITORING", "Follow-up and Complications", `Discuss treatment monitoring, response assessment, complications and prevention.`],
+        ["SUMMARY", "Key Takeaways", `Review the most important clinical and practical points about ${topic}.`]
+      ]
+    : [
+        ["INTRODUCTION", "Understanding the Topic", `Define ${topic}, explain its background and describe why it matters.`],
+        ["FOUNDATIONS", "Core Concepts", `Introduce the essential principles, terminology and foundations of ${topic}.`],
+        ["COMPONENTS", "Main Elements", `Describe the major components, characteristics and important features of ${topic}.`],
+        ["PROCESS", "How It Works", `Explain the processes, mechanisms and relationships involved in ${topic}.`],
+        ["APPLICATIONS", "Practical Applications", `Show how ${topic} is applied in real situations, with relevant examples.`],
+        ["ANALYSIS", "Benefits and Challenges", `Evaluate the advantages, limitations and common challenges associated with ${topic}.`],
+        ["EXAMPLES", "Illustrative Examples", `Present practical examples and explain what they demonstrate about ${topic}.`],
+        ["STRATEGIES", "Best Practices", `Describe effective strategies, recommendations and approaches for ${topic}.`],
+        ["REVIEW", "Knowledge Check", `Provide important review questions and concepts to remember about ${topic}.`],
+        ["CONCLUSION", "Summary and Takeaways", `Summarize the central ideas, conclusions and key lessons about ${topic}.`]
+      ];
+
+  const themes = ["midnight", "violet", "mint", "sunset"];
+  const layouts = ["title", "split", "standard", "image-focus", "quote"];
+
+  return Array.from({ length: count }, (_, i) => {
+    const section = sections[i % sections.length];
+    const repeat = Math.floor(i / sections.length);
+
+    return {
+      eyebrow: section[0],
+      title: section[1] + (repeat ? ` — Part ${repeat + 1}` : ""),
+      body: section[2] + (medical
+        ? "\n\nInclude relevant clinical examples, important terminology and practical considerations."
+        : "\n\nInclude clear explanations, relevant examples and practical takeaways."),
+      speakerNotes:
+        `Presenter notes: Explain ${section[1].toLowerCase()} in relation to ${topic}. Expand on the key concepts and give an appropriate example.`,
+      theme: themes[i % themes.length],
+      layout: i === 0 ? "title" : layouts[i % layouts.length],
+      transition: "fade",
+      animation: i % 2 === 0 ? "rise" : "fade",
+      elements: []
+    };
+  });
+}
+
+function validateGeneratedSlides(data, expectedCount) {
+  const list = Array.isArray(data) ? data : data?.slides;
+
+  if (!Array.isArray(list) || list.length !== expectedCount) {
+    throw new Error("AI returned an invalid slide structure.");
+  }
+
+  return list.map((slide, i) => {
+    if (!slide || typeof slide.title !== "string" ||
+        typeof slide.body !== "string") {
+      throw new Error(`Slide ${i + 1} is incomplete.`);
+    }
+
+    return {
+      eyebrow: String(slide.eyebrow || "PRESENTATION").slice(0, 100),
+      title: slide.title.slice(0, 200),
+      body: slide.body.slice(0, 6000),
+      speakerNotes: String(slide.speakerNotes || ""),
+      theme: "midnight",
+      layout: i === 0 ? "title" : "standard",
+      transition: "fade",
+      animation: "rise",
+      elements: []
+    };
+  });
+}
+
+if ($("generateAISlides")) {
+  $("generateAISlides").onclick = async () => {
+    const topic = ($("aiSlideTopic")?.value || "").trim();
+    const status = $("aiGeneratorStatus");
+    const button = $("generateAISlides");
+
+    if (!topic) {
+      status.textContent = "Please enter a presentation topic first.";
+      return;
+    }
+
+    const count = Number($("aiSlideCount")?.value || 10);
+    const style = $("aiAudienceStyle")?.value || "educational";
+    const template = $("aiSlideTemplate")?.value || "mint-pro";
+
+    button.disabled = true;
+    status.textContent = "Preparing your presentation...";
+
+    let generatedSlides;
+    let generationMode = "Local";
+
+    try {
+      // Optional secure AI backend.
+      const apiUrl = window.GIDY_AI_API_URL;
+
+      if (apiUrl) {
+        try {
+          status.textContent = "Generating with AI...";
+
+          const response = await fetch(apiUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              task: "generate_presentation",
+              topic,
+              slideCount: count,
+              style
+            })
+          });
+
+          if (!response.ok) {
+            throw new Error("AI service unavailable.");
+          }
+
+          const result = await response.json();
+          generatedSlides = validateGeneratedSlides(result, count);
+          generationMode = "AI";
+        } catch (error) {
+          console.warn("AI generation unavailable:", error);
+          status.textContent = "AI unavailable. Using local generation...";
+        }
       }
-      const count = Number($("aiSlideCount")?.value || 10);
-      const styleMode = $("aiAudienceStyle")?.value || "educational";
-      const tplKey = $("aiSlideTemplate")?.value || "dark-tech";
+
+      // Free local fallback.
+      if (!generatedSlides) {
+        generatedSlides = buildDetailedLocalDeck(
+          topic,
+          count,
+          style,
+          template
+        );
+      }
 
       recordUndo();
-      slides = buildTopicDeck(topic, count, styleMode, tplKey);
+
+      slides = generatedSlides;
       current = 0;
 
-      const shortTitle = topic.split(/[-—\n]/)[0].trim().slice(0, 60) || "AI Presentation";
-      localStorage.setItem(DECK_TITLE_KEY, shortTitle);
-      if ($("activeDeckTitle")) $("activeDeckTitle").textContent = shortTitle;
+      const title = topic.split(/[-—\n]/)[0]
+        .trim().slice(0, 60) || "AI Presentation";
+
+      localStorage.setItem(DECK_TITLE_KEY, title);
+
+      if ($("activeDeckTitle")) {
+        $("activeDeckTitle").textContent = title;
+      }
 
       saveProjectNow(false);
-      document.getElementById("aiGeneratorScreen")?.classList.remove("open");
+
+      document.getElementById("aiGeneratorScreen")
+        ?.classList.remove("open");
+
       document.body.classList.remove("home-mode");
       document.body.classList.add("editor-mode");
+
       render();
-      if (statusEl) statusEl.textContent = "";
-      msg(`Generated ${slides.length}-slide deck on "${shortTitle}".`);
-    };
-  }
+
+      status.textContent = "";
+
+      msg(`${generationMode} presentation created: ${slides.length} slides.`);
+    } catch (error) {
+      console.error(error);
+      status.textContent = "Generation failed: " + error.message;
+    } finally {
+      button.disabled = false;
+    }
+  };
+}
+
 
   if ($("aiImproveText")) {
     $("aiImproveText").onclick = () => {
