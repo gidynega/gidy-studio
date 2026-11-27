@@ -358,7 +358,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Bottom navigation
-  document.querySelectorAll("[data-nav]").forEach(button => {
+  
+   document.querySelectorAll(
+  '[data-nav]:not([data-nav="Scan"])'
+).forEach(button => {
     button.addEventListener("click", () => {
       showPage(button.dataset.nav);
     });
