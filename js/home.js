@@ -70,19 +70,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const aiGeneratorScreen = $("#aiGeneratorScreen");
   const backTemplates = $("#backTemplates");
 
-  // Open AI Slides from dashboard or creation menu
-  $$('[data-open="slides"]').forEach(button => {
-    button.addEventListener("click", event => {
-      event.preventDefault();
+ // OPEN AI SLIDE GENERATOR DIRECTLY FROM HOME
+$$('[data-open="slides"]').forEach(button => {
+  button.addEventListener("click", event => {
+    event.preventDefault();
 
-      closeCreationMenu();
+    closeCreationMenu();
 
-      templateScreen?.classList.add("open");
-      templateScreen?.setAttribute("aria-hidden", "false");
+    templateScreen?.classList.remove("open");
+    templateScreen?.setAttribute("aria-hidden", "true");
 
-      aiGeneratorScreen?.classList.remove("open");
-    });
+    openAIGenerator("mint-pro");
   });
+});
 
 
   // OPEN SLIDES FROM THE PLUS CREATION MENU
